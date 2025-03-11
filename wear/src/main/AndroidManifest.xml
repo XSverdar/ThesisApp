@@ -41,7 +41,6 @@
             </intent-filter>
         </activity>
 
-        <!-- Foreground Sensor Service -->
         <service
             android:name=".service.SensorService"
             android:foregroundServiceType="health"

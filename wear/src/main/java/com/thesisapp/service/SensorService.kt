@@ -42,6 +42,10 @@ class SensorService : Service(), SensorEventListener {
         registerSensors()
     }
 
+    override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+        return START_STICKY // Ensures service restarts if killed
+    }
+
     private fun registerSensors() {
         accelerometer?.let { sensorManager.registerListener(this, it, SensorManager.SENSOR_DELAY_FASTEST) }
         gyroscope?.let { sensorManager.registerListener(this, it, SensorManager.SENSOR_DELAY_FASTEST) }
