@@ -22,6 +22,7 @@ import com.thesisapp.data.AppDatabase
 import com.thesisapp.data.SensorData
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
 class SensorService : Service(), SensorEventListener {
@@ -31,6 +32,7 @@ class SensorService : Service(), SensorEventListener {
     private var gyroscope: Sensor? = null
     private var heartRate: Sensor? = null
     private lateinit var database: AppDatabase
+    private val serviceScope = CoroutineScope(Dispatchers.IO + Job())
 
     override fun onCreate() {
         super.onCreate()
@@ -55,41 +57,26 @@ class SensorService : Service(), SensorEventListener {
     }
 
     override fun onSensorChanged(event: SensorEvent?) {
-        event?.let {
-            CoroutineScope(Dispatchers.IO).launch {
-                when (it.sensor.type) {
-                    Sensor.TYPE_LINEAR_ACCELERATION -> handleAcceleration(it.values)
-                    Sensor.TYPE_GYROSCOPE -> handleGyroscope(it.values)
-                    Sensor.TYPE_HEART_RATE -> handleHeartRate(it.values[0])
-                }
+        if (event == null) return
+
+        serviceScope.launch {
+            when (event.sensor.type) {
+                Sensor.TYPE_LINEAR_ACCELERATION -> handleSensorData("Accelerometer", event.values)
+                Sensor.TYPE_GYROSCOPE -> handleSensorData("Gyroscope", event.values)
+                Sensor.TYPE_HEART_RATE -> handleHeartRate(event.values[0])
             }
         }
     }
 
-    private fun handleAcceleration(values: FloatArray) {
-        val (ax, ay, az) = values
-        CoroutineScope(Dispatchers.IO).launch {
-            database.sensorDataDao().insertSensorData(SensorData("Accelerometer", ax, ay, az))
-            database.close() // Forces data write
-            Log.d("SensorService", "ACC: $ax, $ay, $az")
-        }
+    private suspend fun handleSensorData(type: String, values: FloatArray) {
+        val (x, y, z) = values
+        database.sensorDataDao().insertSensorData(SensorData(type = type, x = x, y = y, z = z))
+        Log.d("SensorService", "$type: $x, $y, $z")
     }
 
-    private fun handleGyroscope(values: FloatArray) {
-        val (gx, gy, gz) = values
-        CoroutineScope(Dispatchers.IO).launch {
-            database.sensorDataDao().insertSensorData(SensorData("Gyroscope", gx, gy, gz))
-            database.close()
-            Log.d("SensorService", "GYR: $gx, $gy, $gz")
-        }
-    }
-
-    private fun handleHeartRate(hr: Float) {
-        CoroutineScope(Dispatchers.IO).launch {
-            database.sensorDataDao().insertSensorData(SensorData("HeartRate", hr, null, null))
-            database.close()
-            Log.d("SensorService", "HR: $hr")
-        }
+    private suspend fun handleHeartRate(hr: Float) {
+        database.sensorDataDao().insertSensorData(SensorData(type = "HeartRate", x = hr, y = null, z = null))
+        Log.d("SensorService", "HeartRate: $hr")
     }
 
     override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {}
