@@ -1,24 +1,21 @@
-package com.thesisapp.presentation
-
+import android.os.PowerManager
+import android.content.Context
 import android.content.Intent
-import android.os.Bundle
-import android.view.WindowManager
-import androidx.activity.ComponentActivity
-import com.thesisapp.service.SensorService
+import android.provider.Settings
+import android.net.Uri
 
-class MainActivity : ComponentActivity() {
+override fun onCreate() {
+    super.onCreate()
+    createNotificationChannel()
+    startForeground(1, createNotification())
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        // Keeps the screen from sleeping while the app is open
-        window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
-
-        // Automatically start the sensor service when app launches
-        val serviceIntent = Intent(this, SensorService::class.java)
-        startForegroundService(serviceIntent)
-
-        // Finish the activity so only the background service runs
-        finish()
+    // Prevent OS from killing the app
+    val powerManager = getSystemService(Context.POWER_SERVICE) as PowerManager
+    if (!powerManager.isIgnoringBatteryOptimizations(packageName)) {
+        val intent = Intent(Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS)
+            .setData(Uri.parse("package:$packageName"))
+        startActivity(intent)
     }
+
+    registerSensors() // Start sensors after requesting battery optimization
 }
