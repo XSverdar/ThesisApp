@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@color/off_white"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:padding="24dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ProgressBar
+        style="?android:attr/progressBarStyleHorizontal"
+        android:id="@+id/progressBar"
+        android:layout_width="match_parent"
+        android:layout_height="8dp"
+        android:layout_marginTop="16dp"
+        android:progress="100"
+        android:progressTint="@color/primary_teal"
+        android:backgroundTint="@color/light_gray" />
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Watch Connected"
+        android:textColor="#204A40"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:layout_marginTop="48dp"
+        android:layout_gravity="center" />
+
+    <TextView
+        android:id="@+id/subtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ready to track swim strokes!"
+        android:textColor="#2C7C6F"
+        android:textSize="14sp"
+        android:layout_marginTop="8dp"
+        android:layout_gravity="center" />
+
+    <ImageView
+        android:id="@+id/connectedImage"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_marginTop="50dp"
+        android:src="@drawable/connected_success" />
+
+    <Button
+        android:id="@+id/btnProceed"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="Go to Dashboard"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        android:layout_marginTop="48dp"
+        android:background="@drawable/button_teal" />
+</LinearLayout>
