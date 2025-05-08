@@ -1,42 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:background="@color/off_white"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center_horizontal"
     android:padding="24dp"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:background="@color/background">
 
     <ProgressBar
-        style="?android:attr/progressBarStyleHorizontal"
         android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="match_parent"
         android:layout_height="8dp"
         android:layout_marginTop="16dp"
         android:progress="100"
-        android:progressTint="@color/primary_teal"
-        android:backgroundTint="@color/light_gray" />
+        android:progressTint="@color/done"
+        android:backgroundTint="@color/progress" />
 
     <TextView
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Watch Connected"
-        android:textColor="#204A40"
-        android:textStyle="bold"
-        android:textSize="20sp"
         android:layout_marginTop="48dp"
-        android:layout_gravity="center" />
+        android:layout_gravity="center"
+        android:text="Watch Connected"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="@color/text" />
 
     <TextView
         android:id="@+id/subtitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Ready to track swim strokes!"
-        android:textColor="#2C7C6F"
-        android:textSize="14sp"
         android:layout_marginTop="8dp"
-        android:layout_gravity="center" />
+        android:layout_gravity="center"
+        android:text="Ready to track swim strokes!"
+        android:textSize="16sp"
+        android:textColor="@color/text" />
 
     <ImageView
         android:id="@+id/connectedImage"
@@ -49,9 +49,10 @@
         android:id="@+id/btnProceed"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:text="Go to Dashboard"
-        android:textColor="#FFFFFF"
-        android:textStyle="bold"
         android:layout_marginTop="48dp"
-        android:background="@drawable/button_teal" />
+        android:layout_gravity="center"
+        android:text="Go to Dashboard"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:backgroundTint="@color/button" />
 </LinearLayout>

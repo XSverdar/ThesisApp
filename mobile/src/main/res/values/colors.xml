@@ -1,20 +1,30 @@
 <resources>
     <!-- Default theme colors -->
-    <color name="purple_200">#BB86FC</color>
-    <color name="purple_500">#6200EE</color>
-    <color name="purple_700">#3700B3</color>
-    <color name="teal_200">#03DAC5</color>
-    <color name="teal_700">#018786</color>
     <color name="black">#000000</color>
     <color name="white">#FFFFFF</color>
+    <color name="background">#F5FFFD</color>
 
-    <!-- Custom colors -->
-    <color name="blue">#B8F2F0</color>
-    <color name="light_blue">#DCEEFF</color>
-    <color name="light_gray">#E0E0E0</color>
-    <color name="off_white">#FAFAF8</color>
-    <color name="progress_bg">#DDEDEE</color>
-    <color name="primary_teal">#1BCAC3</color>
-    <color name="button_gray">#D6E2EF</color>
-    <color name="text_dark">#2C5A4E</color>
+    <!-- ACTIVITY_MAIN_DASHBOARD.XML -->
+    <color name="main">#BAF2F2</color>
+    <color name="dashboard_button">#CEE5FA</color>
+    <color name="disabled">#C6D6E5</color>
+    <color name="disabled_text">#838E98</color>
+
+    <!-- ACTIVITY_CONNECT_WATCH.XML -->
+    <color name="text">#2C6D6A</color>
+    <color name="button">#24BFBF</color>
+    <color name="progress">#CAE1F0</color>
+    <color name="done">#24BFBF</color>
+
+    <!-- ACTIVITY_MAIN_DASHBOARD.XML -->
+
+    <!-- ACTIVITY_MAIN_DASHBOARD.XML -->
+
+    <!-- ACTIVITY_MAIN_DASHBOARD.XML -->
+
+    <!-- ACTIVITY_MAIN_DASHBOARD.XML -->
+
+    <!-- ACTIVITY_MAIN_DASHBOARD.XML -->
+
+    <!-- ACTIVITY_MAIN_DASHBOARD.XML -->
 </resources>

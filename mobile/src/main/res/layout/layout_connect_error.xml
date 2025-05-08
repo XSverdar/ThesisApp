@@ -1,43 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:background="@color/off_white"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center_horizontal"
     android:padding="24dp"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:background="@color/background">
+
+    <Button
+        android:id="@+id/return"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:backgroundTint="@color/button"
+        android:text="Return"
+        android:textColor="@color/black" />
 
     <ProgressBar
-        style="?android:attr/progressBarStyleHorizontal"
         android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="match_parent"
         android:layout_height="8dp"
         android:layout_marginTop="16dp"
         android:progress="60"
-        android:progressTint="@color/primary_teal"
-        android:backgroundTint="@color/light_gray"
-        android:layout_alignParentTop="true" />
+        android:progressTint="@color/done"
+        android:backgroundTint="@color/progress" />
 
     <TextView
         android:id="@+id/title"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Connect your smartwatch"
-        android:textColor="#204A40"
+        android:layout_marginTop="40dp"
+        android:gravity="center"
+        android:text="Connect your Smartwatch"
+        android:textSize="24sp"
         android:textStyle="bold"
-        android:textSize="20sp"
-        android:layout_below="@+id/progressBar"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="40dp" />
+        android:textColor="@color/text" />
 
     <TextView
         android:id="@+id/subtitle"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
         android:text="Sync your mobile app to your smartwatch to gather data"
-        android:textColor="#2C7C6F"
-        android:textSize="14sp"
-        android:layout_marginTop="8dp" />
+        android:textSize="16sp"
+        android:textColor="@color/text" />
 
     <ImageView
         android:id="@+id/watchImage"
@@ -48,31 +56,34 @@
 
     <TextView
         android:id="@+id/errorTitle"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Device not found"
-        android:textColor="#204A40"
+        android:layout_marginTop="24dp"
+        android:gravity="center"
+        android:text="Device not Found"
+        android:textSize="20sp"
         android:textStyle="bold"
-        android:textSize="18sp"
-        android:layout_marginTop="24dp" />
+        android:textColor="@color/text" />
 
     <TextView
         android:id="@+id/errorSubtitle"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
         android:text="Make sure the bluetooth is turned on on both devices"
-        android:textColor="#2C7C6F"
-        android:textSize="14sp"
-        android:layout_marginTop="8dp" />
+        android:textSize="16sp"
+        android:textColor="@color/text" />
 
     <Button
         android:id="@+id/tryAgainButton"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_marginTop="50dp"
+        android:backgroundTint="@color/button"
         android:text="Try Again"
-        android:textStyle="bold"
         android:textSize="16sp"
-        android:backgroundTint="#13C2A3"
+        android:textStyle="bold"
         android:textColor="@color/black" />
+
 </LinearLayout>
