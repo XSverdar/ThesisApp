@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@color/off_white"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:padding="24dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ProgressBar
+        style="?android:attr/progressBarStyleHorizontal"
+        android:id="@+id/progressBar"
+        android:layout_width="match_parent"
+        android:layout_height="8dp"
+        android:layout_marginTop="16dp"
+        android:progress="80"
+        android:progressTint="@color/primary_teal"
+        android:backgroundTint="@color/light_gray" />
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Connecting Device"
+        android:textColor="#204A40"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:layout_marginTop="40dp" />
+
+    <TextView
+        android:id="@+id/subtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Confirm on the watch"
+        android:textColor="#2C7C6F"
+        android:textSize="14sp"
+        android:layout_marginTop="8dp" />
+
+    <!-- Connection Animation/Icon -->
+    <ImageView
+        android:id="@+id/connectionImage"
+        android:layout_width="320dp"
+        android:layout_height="320dp"
+        android:layout_marginTop="50dp"
+        android:src="@drawable/ic_loading" />
+</LinearLayout>
