@@ -16,10 +16,7 @@
     <color name="progress">#CAE1F0</color>
     <color name="done">#24BFBF</color>
 
-    <!-- ACTIVITY_TRACKING.XML -->
-    <color name="notify">#D3EDE8</color>
-    <color name="notify_text">#34A853</color>
-    <color name="register">#9E9C9C</color>
+    <!-- ACTIVITY_MAIN_DASHBOARD.XML -->
 
     <!-- ACTIVITY_MAIN_DASHBOARD.XML -->
 

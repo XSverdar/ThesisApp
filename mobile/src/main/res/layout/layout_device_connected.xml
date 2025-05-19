@@ -19,24 +19,24 @@
 
     <TextView
         android:id="@+id/title"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="48dp"
-        android:gravity="center"
+        android:layout_gravity="center"
         android:text="Watch Connected"
-        android:textColor="@color/text"
         android:textSize="24sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:textColor="@color/text" />
 
     <TextView
         android:id="@+id/subtitle"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:gravity="center"
+        android:layout_gravity="center"
         android:text="Ready to track swim strokes!"
-        android:textColor="@color/text"
-        android:textSize="16sp" />
+        android:textSize="16sp"
+        android:textColor="@color/text" />
 
     <ImageView
         android:id="@+id/connectedImage"
@@ -47,14 +47,12 @@
 
     <Button
         android:id="@+id/btnProceed"
-        android:layout_width="300dp"
-        android:layout_height="80dp"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
         android:layout_marginTop="48dp"
         android:layout_gravity="center"
-        android:backgroundTint="@color/button"
         android:text="Go to Dashboard"
+        android:textStyle="bold"
         android:textColor="@color/black"
-        android:textSize="20sp"
-        android:textStyle="bold" />
-
+        android:backgroundTint="@color/button" />
 </LinearLayout>

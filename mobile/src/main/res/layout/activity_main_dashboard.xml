@@ -4,9 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/background"
     android:padding="16dp"
-    android:gravity="center_horizontal"
-    android:background="@color/background">
+    android:gravity="center_horizontal">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -39,10 +39,10 @@
         android:layout_width="250dp"
         android:layout_height="250dp"
         android:layout_marginTop="20dp"
-        android:paddingTop="10dp"
         android:backgroundTint="@color/main"
         android:drawableTop="@drawable/ic_watch"
         android:gravity="center"
+        android:paddingTop="10dp"
         android:shape="oval"
         android:text="Connect Smartwatch"
         android:textAlignment="center"
@@ -51,11 +51,11 @@
         android:textStyle="bold" />
 
     <GridLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:columnCount="2"
         android:alignmentMode="alignMargins"
+        android:columnCount="2"
         android:rowOrderPreserved="false"
         android:useDefaultMargins="true">
 
