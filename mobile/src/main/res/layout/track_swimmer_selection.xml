@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:background="@color/background"
+    android:padding="24dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_back"
+            android:backgroundTint="none" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="TRACKING"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="?android:attr/listDivider" />
+
+    <TextView
+        android:id="@+id/connection_status"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="30dp"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:drawableLeft="@drawable/ic_check"
+        android:drawablePadding="12dp"
+        android:gravity="center_vertical"
+        android:text="Connected to Google Pixel Watch 2"
+        android:textColor="@color/text"
+        android:textStyle="bold"
+        android:textSize="17sp"
+        android:background="@drawable/green_box"
+        android:elevation="10dp"
+        tools:ignore="RtlSymmetry" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Choose your swimmer"
+        android:textColor="@color/text"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:layout_marginTop="24dp"/>
+
+    <RadioGroup
+        android:id="@+id/swimmerRadioGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp">
+
+        <RadioButton
+            android:id="@+id/swimmer1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Ryan Suarez"
+            style="@style/CustomRadioButton"/>
+
+        <RadioButton
+            android:id="@+id/swimmer2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Amber Tongson"
+            style="@style/CustomRadioButton"/>
+
+        <RadioButton
+            android:id="@+id/swimmer3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Alexander Chu"
+            style="@style/CustomRadioButton"/>
+
+        <RadioButton
+            android:id="@+id/swimmer4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Joan Perez"
+            style="@style/CustomRadioButton"/>
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/continueButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Continue"
+        android:layout_marginTop="32dp"
+        android:backgroundTint="@color/button"
+        android:textColor="@android:color/black"
+        android:textStyle="bold" />
+
+</LinearLayout>
