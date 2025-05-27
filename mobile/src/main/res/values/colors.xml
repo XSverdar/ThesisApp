@@ -20,6 +20,7 @@
     <color name="notify">#D3EDE8</color>
     <color name="notify_text">#34A853</color>
     <color name="register">#9E9C9C</color>
+    <color name="sub">#969E98</color>
 
     <!-- ACTIVITY_MAIN_DASHBOARD.XML -->
 
