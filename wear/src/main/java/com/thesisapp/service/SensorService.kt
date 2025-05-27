@@ -1,29 +1,21 @@
 package com.thesisapp.service
 
-import android.app.Notification
-import android.app.NotificationChannel
-import android.app.NotificationManager
-import android.app.Service
+import android.Manifest
+import android.app.*
 import android.content.Context
 import android.content.Intent
-import android.hardware.Sensor
-import android.hardware.SensorEvent
-import android.hardware.SensorEventListener
-import android.hardware.SensorManager
-import android.os.Build
-import android.os.IBinder
-import android.os.PowerManager
+import android.content.pm.PackageManager
+import android.hardware.*
+import android.os.*
 import android.provider.Settings
 import android.net.Uri
 import android.util.Log
 import androidx.core.app.NotificationCompat
+import androidx.core.content.ContextCompat
 import com.thesisapp.R
 import com.thesisapp.data.AppDatabase
 import com.thesisapp.data.SensorData
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 
 private const val PPG_SENSOR_NAME = "PPG Sensor"
 private const val ECG_SENSOR_NAME = "ECG Sensor"
@@ -39,7 +31,6 @@ class SensorService : Service(), SensorEventListener {
     private lateinit var database: AppDatabase
     private val serviceScope = CoroutineScope(Dispatchers.IO + Job())
 
-    // Temp holders for sensor values
     private var accelValues: FloatArray? = null
     private var gyroValues: FloatArray? = null
     private var heartRateValue: Float? = null
@@ -48,31 +39,36 @@ class SensorService : Service(), SensorEventListener {
 
     override fun onCreate() {
         super.onCreate()
+
+        // Exit early if permission is not granted
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.BODY_SENSORS)
+            != PackageManager.PERMISSION_GRANTED) {
+            Log.e("SensorService", "Missing BODY_SENSORS permission. Stopping service.")
+            stopSelf()
+            return
+        }
+
         createNotificationChannel()
         startForeground(1, createNotification())
 
         database = AppDatabase.getInstance(this)
-
         sensorManager = getSystemService(SENSOR_SERVICE) as SensorManager
+
         accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_LINEAR_ACCELERATION)
         gyroscope = sensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE)
         heartRate = sensorManager.getDefaultSensor(Sensor.TYPE_HEART_RATE)
-        ppg = sensorManager.getDefaultSensor(Sensor.TYPE_DEVICE_PRIVATE_BASE + 1)
-        ecg = sensorManager.getDefaultSensor(Sensor.TYPE_DEVICE_PRIVATE_BASE + 2)
 
+        // Try fallback based on name for ppg and ecg
         for (sensor in sensorManager.getSensorList(Sensor.TYPE_ALL)) {
-            when {
-                sensor.name.equals("PPG Sensor", ignoreCase = true) -> {
-                    ppg = sensor
-                    Log.i("SensorService", "PPG sensor found: ${sensor.name}")
-                }
-
-                sensor.name.equals("ECG Sensor", ignoreCase = true) -> {
-                    ecg = sensor
-                    Log.i("SensorService", "ECG sensor found: ${sensor.name}")
-                }
+            if (sensor.name.equals(PPG_SENSOR_NAME, ignoreCase = true)) {
+                ppg = sensor
+                Log.i("SensorService", "PPG sensor found: ${sensor.name}")
+            } else if (sensor.name.equals(ECG_SENSOR_NAME, ignoreCase = true)) {
+                ecg = sensor
+                Log.i("SensorService", "ECG sensor found: ${sensor.name}")
             }
         }
+
         requestBatteryOptimizationExemption()
         registerSensors()
     }
@@ -95,14 +91,11 @@ class SensorService : Service(), SensorEventListener {
         }
 
         when (event.sensor.name) {
-
             PPG_SENSOR_NAME -> ppgValue = event.values[0]
             ECG_SENSOR_NAME -> ecgValue = event.values[0]
-
         }
 
-        // Save only when all three types are available
-        if (accelValues != null && gyroValues != null && ppgValue != null && ecgValue!= null) {
+        if (accelValues != null && gyroValues != null && ppgValue != null && ecgValue != null) {
             val currentData = SensorData(
                 accel_x = accelValues!![0],
                 accel_y = accelValues!![1],
@@ -120,7 +113,6 @@ class SensorService : Service(), SensorEventListener {
                 Log.d("SensorService", "Saved combined data: $currentData")
             }
 
-            // Reset to wait for new synced values
             accelValues = null
             gyroValues = null
             heartRateValue = null
@@ -132,7 +124,7 @@ class SensorService : Service(), SensorEventListener {
     override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {}
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-        return START_STICKY // Ensures service restarts if killed
+        return START_STICKY
     }
 
     override fun onDestroy() {
