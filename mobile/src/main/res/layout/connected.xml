@@ -8,7 +8,6 @@
     android:background="@color/background">
 
     <ProgressBar
-        android:id="@+id/progressBar"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="match_parent"
         android:layout_height="8dp"
@@ -18,28 +17,23 @@
         android:backgroundTint="@color/progress" />
 
     <TextView
-        android:id="@+id/title"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="48dp"
-        android:gravity="center"
         android:text="Watch Connected"
         android:textColor="@color/text"
         android:textSize="24sp"
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/subtitle"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:gravity="center"
         android:text="Ready to track swim strokes!"
         android:textColor="@color/text"
         android:textSize="16sp" />
 
     <ImageView
-        android:id="@+id/connectedImage"
         android:layout_width="300dp"
         android:layout_height="300dp"
         android:layout_marginTop="50dp"
@@ -48,7 +42,7 @@
     <Button
         android:id="@+id/btnProceed"
         android:layout_width="300dp"
-        android:layout_height="80dp"
+        android:layout_height="60dp"
         android:layout_marginTop="48dp"
         android:layout_gravity="center"
         android:backgroundTint="@color/button"

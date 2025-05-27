@@ -5,8 +5,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center_horizontal"
-    android:background="@color/background"
-    android:padding="24dp">
+    android:padding="24dp"
+    android:background="@color/background">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -18,7 +18,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_back"
-            android:backgroundTint="none" />
+            android:background="@android:color/transparent" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -30,26 +30,24 @@
     </LinearLayout>
 
     <View
-        android:id="@+id/divider"
         android:layout_width="match_parent"
         android:layout_height="2dp"
         android:background="?android:attr/listDivider" />
 
     <TextView
-        android:id="@+id/connection_status"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_marginTop="40dp"
         android:layout_marginBottom="30dp"
         android:paddingStart="20dp"
         android:paddingEnd="20dp"
+        android:text="Connected to Google Pixel Watch 2"
+        android:textSize="17sp"
+        android:textStyle="bold"
+        android:textColor="@color/text"
+        android:gravity="center_vertical"
         android:drawableLeft="@drawable/ic_check"
         android:drawablePadding="12dp"
-        android:gravity="center_vertical"
-        android:text="Connected to Google Pixel Watch 2"
-        android:textColor="@color/text"
-        android:textStyle="bold"
-        android:textSize="17sp"
         android:background="@drawable/green_box"
         android:elevation="10dp"
         tools:ignore="RtlSymmetry" />
@@ -59,10 +57,10 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"
         android:text="Choose your Swimmer"
-        android:textColor="@color/register"
         android:textSize="24sp"
-        android:gravity="center"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:textColor="@color/register"
+        android:gravity="center" />
 
     <ImageView
         android:layout_width="100dp"
@@ -74,20 +72,20 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="32dp"
-        android:gravity="center"
         android:text="You don’t have any entries yet\nAdd your first one now"
+        android:textStyle="bold"
         android:textColor="@color/register"
-        android:textStyle="bold" />
+        android:gravity="center" />
 
     <Button
-        android:id="@+id/btn_add_swimmer"
+        android:id="@+id/btnAddSwimmer"
         android:layout_width="300dp"
-        android:layout_height="80dp"
-        android:backgroundTint="@color/button"
+        android:layout_height="60dp"
         android:text="+ Add a Swimmer"
-        android:textAllCaps="false"
-        android:textColor="@color/white"
         android:textSize="20sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:textAllCaps="false"
+        android:backgroundTint="@color/button" />
 
 </LinearLayout>

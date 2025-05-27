@@ -17,7 +17,6 @@
         android:textColor="@color/black" />
 
     <ProgressBar
-        android:id="@+id/progressBar"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="match_parent"
         android:layout_height="8dp"
@@ -27,19 +26,16 @@
         android:backgroundTint="@color/progress" />
 
     <TextView
-        android:id="@+id/title"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
-        android:gravity="center"
         android:text="Connect your Smartwatch"
         android:textColor="@color/text"
         android:textSize="24sp"
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/subtitle"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:gravity="center"
@@ -48,26 +44,22 @@
         android:textSize="16sp" />
 
     <ImageView
-        android:id="@+id/watchImage"
         android:layout_width="300dp"
         android:layout_height="300dp"
         android:layout_marginTop="40dp"
         android:src="@drawable/ic_na" />
 
     <TextView
-        android:id="@+id/errorTitle"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:gravity="center"
         android:text="Device not Found"
         android:textColor="@color/text"
-        android:textSize="20sp"
+        android:textSize="24sp"
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/errorSubtitle"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:gravity="center"
@@ -78,7 +70,7 @@
     <Button
         android:id="@+id/tryAgainButton"
         android:layout_width="300dp"
-        android:layout_height="80dp"
+        android:layout_height="60dp"
         android:layout_marginTop="50dp"
         android:backgroundTint="@color/button"
         android:text="Try Again"

@@ -12,9 +12,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="start"
+        android:backgroundTint="@color/button"
         android:text="Return"
-        android:textColor="@color/black"
-        android:backgroundTint="@color/button" />
+        android:textColor="@color/black" />
 
     <ProgressBar
         style="?android:attr/progressBarStyleHorizontal"
@@ -26,20 +26,18 @@
         android:backgroundTint="@color/progress" />
 
     <TextView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
-        android:gravity="center"
         android:text="Devices Found"
         android:textColor="@color/text"
         android:textSize="24sp"
         android:textStyle="bold" />
 
     <TextView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:gravity="center"
         android:text="Choose which watch you want to connect"
         android:textColor="@color/text"
         android:textSize="16sp" />
@@ -54,37 +52,37 @@
         <Button
             android:id="@+id/btnWatch1"
             android:layout_width="match_parent"
-            android:layout_height="70sp"
+            android:layout_height="70dp"
             android:layout_marginBottom="12dp"
-            android:text="Google Pixel Watch 2"
-            android:textColor="@color/black"
-            android:textStyle="bold"
             android:background="@drawable/device_button"
             android:drawableLeft="@drawable/android"
-            android:drawablePadding="12dp" />
+            android:drawablePadding="12dp"
+            android:text="Google Pixel Watch 2"
+            android:textColor="@color/black"
+            android:textStyle="bold" />
 
         <Button
             android:id="@+id/btnWatch2"
             android:layout_width="match_parent"
-            android:layout_height="70sp"
+            android:layout_height="70dp"
             android:layout_marginBottom="12dp"
-            android:text="Google Pixel Watch 1"
-            android:textColor="@color/black"
-            android:textStyle="bold"
             android:background="@drawable/device_button"
             android:drawableLeft="@drawable/android"
-            android:drawablePadding="12dp" />
+            android:drawablePadding="12dp"
+            android:text="Google Pixel Watch 1"
+            android:textColor="@color/black"
+            android:textStyle="bold" />
 
         <Button
             android:id="@+id/btnWatch3"
             android:layout_width="match_parent"
-            android:layout_height="70sp"
-            android:text="iWatch"
-            android:textColor="@color/black"
-            android:textStyle="bold"
+            android:layout_height="70dp"
             android:background="@drawable/device_button"
             android:drawableLeft="@drawable/apple"
-            android:drawablePadding="12dp" />
+            android:drawablePadding="12dp"
+            android:text="iWatch"
+            android:textColor="@color/black"
+            android:textStyle="bold" />
     </LinearLayout>
 
 </LinearLayout>

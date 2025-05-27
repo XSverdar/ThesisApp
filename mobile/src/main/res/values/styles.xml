@@ -3,7 +3,7 @@
         <item name="android:buttonTint">#FF666666</item>
         <item name="android:textColor">#FF000000</item>
         <item name="android:layout_marginBottom">12dp</item>
-        <item name="android:background">@drawable/rounded_edittext</item>
+        <item name="android:background">@drawable/border_button</item>
         <item name="android:padding">12dp</item>
     </style>
 </resources>

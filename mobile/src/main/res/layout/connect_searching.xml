@@ -3,8 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="24dp"
     android:gravity="center_horizontal"
+    android:padding="24dp"
     android:background="@color/background">
 
     <Button
@@ -12,9 +12,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="start"
+        android:backgroundTint="@color/button"
         android:text="Return"
-        android:textColor="@color/black"
-        android:backgroundTint="@color/button" />
+        android:textColor="@color/black" />
 
     <ProgressBar
         style="?android:attr/progressBarStyleHorizontal"
@@ -26,38 +26,34 @@
         android:backgroundTint="@color/progress" />
 
     <TextView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:text="Searching"
         android:textColor="@color/text"
         android:textSize="24sp"
-        android:textStyle="bold"
-        android:gravity="center" />
+        android:textStyle="bold" />
 
     <TextView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="Bring watch closer to the phone"
         android:textColor="@color/text"
-        android:textSize="16sp"
-        android:gravity="center" />
+        android:textSize="16sp" />
 
     <ImageView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:src="@drawable/watch_radar" />
 
     <TextView
-        android:id="@+id/loadingText"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:text="Searching..."
         android:textColor="@color/text"
-        android:textSize="18sp"
-        android:gravity="center" />
+        android:textSize="18sp" />
 
 </LinearLayout>

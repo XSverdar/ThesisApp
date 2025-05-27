@@ -2,55 +2,51 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background"
-    android:padding="24dp">
+    android:padding="24dp"
+    android:background="@color/background">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <!-- Header -->
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="80dp"
             android:orientation="horizontal"
-            android:gravity="center_vertical">
+            android:gravity="center">
 
             <ImageButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_back"
-                android:background="@android:color/transparent"
-                android:contentDescription="Back" />
+                android:background="@android:color/transparent" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="History"
+                android:textSize="30sp"
                 android:textStyle="bold"
-                android:textSize="24sp"
-                android:layout_marginStart="12dp" />
+                android:layout_marginStart="10dp" />
         </LinearLayout>
 
-        <!-- Divider -->
         <View
             android:layout_width="match_parent"
             android:layout_height="2dp"
-            android:layout_marginTop="8dp"
             android:background="?android:attr/listDivider" />
 
-        <!-- Title -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Session Details"
-            android:textColor="@color/teal"
+            android:textSize="24sp"
             android:textStyle="bold"
-            android:textSize="20sp"
+            android:textColor="@color/text"
+            android:gravity="center"
+            android:layout_gravity="center_horizontal"
             android:layout_marginTop="16dp" />
 
-        <!-- Date and Swimmer -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -64,13 +60,12 @@
             android:text="Swimmer: Ryan Suarez"
             android:layout_marginTop="4dp" />
 
-        <!-- Duration and Times -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Session Duration: 1hr, 25min"
-            android:layout_marginTop="16dp"
-            android:textColor="@color/dark_gray" />
+            android:textStyle="bold"
+            android:layout_marginTop="16dp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -84,7 +79,6 @@
             android:text="End: 7:35 AM"
             android:layout_marginTop="2dp" />
 
-        <!-- Stroke Breakdown -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -112,7 +106,6 @@
             android:layout_height="wrap_content"
             android:text="Butterfly:" />
 
-        <!-- Pace Breakdown -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -140,4 +133,5 @@
             android:layout_height="wrap_content"
             android:text="Butterfly:" />
     </LinearLayout>
+
 </ScrollView>

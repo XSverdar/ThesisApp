@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="24dp"
     android:gravity="center_horizontal"
-    android:background="@color/background"
-    android:padding="24dp">
+    android:background="@color/background">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -51,7 +50,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Watch Connection: Google Pixel Watch 2"
-            android:textColor="@color/teal" />
+            android:textColor="@color/text" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -63,14 +62,14 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="120dp"
+            android:layout_height="150dp"
             android:layout_marginTop="8dp"
             android:background="@android:color/white"
             android:elevation="2dp" />
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="120dp"
+            android:layout_height="150dp"
             android:layout_marginTop="16dp"
             android:background="@android:color/white"
             android:elevation="2dp" />
@@ -80,7 +79,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:text="Current Total Time: 00:00:00"
-            android:textColor="@color/dark_gray"
+            android:textColor="@color/black"
             android:textStyle="bold" />
 
         <TextView
@@ -88,7 +87,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="Identified Stroke:"
-            android:textColor="@color/danger_red"
+            android:textColor="@color/stroke"
             android:textStyle="bold" />
 
         <LinearLayout
@@ -96,7 +95,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:orientation="horizontal"
-            android:gravity="space_between">
+            android:gravity="center">
 
             <TextView
                 android:layout_width="0dp"
@@ -115,7 +114,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:orientation="horizontal"
-            android:gravity="space_between">
+            android:gravity="center">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -125,6 +124,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="120sp"
                 android:text="Distance: 0m" />
         </LinearLayout>
 
@@ -159,4 +159,5 @@
                 android:contentDescription="Stop" />
         </LinearLayout>
     </LinearLayout>
+
 </ScrollView>

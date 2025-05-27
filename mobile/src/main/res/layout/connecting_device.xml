@@ -17,7 +17,6 @@
         android:textColor="@color/black" />
 
     <ProgressBar
-        android:id="@+id/progressBar"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="match_parent"
         android:layout_height="8dp"
@@ -27,28 +26,23 @@
         android:backgroundTint="@color/progress" />
 
     <TextView
-        android:id="@+id/title"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
-        android:gravity="center"
         android:text="Connecting Device"
         android:textColor="@color/text"
         android:textSize="24sp"
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/subtitle"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:gravity="center"
         android:text="Confirm on the watch"
         android:textColor="@color/text"
         android:textSize="16sp" />
 
     <ImageView
-        android:id="@+id/connectionImage"
         android:layout_width="320dp"
         android:layout_height="320dp"
         android:layout_marginTop="50dp"
