@@ -8,21 +8,21 @@
     android:outAnimation="@android:anim/fade_out">
 
     <!-- 1) Prompt user to connect -->
-    <include layout="@layout/layout_connect_prompt" />
+    <include layout="@layout/connect_prompt" />
 
     <!-- 2) Searching animation -->
-    <include layout="@layout/layout_connect_searching" />
+    <include layout="@layout/connect_searching" />
 
     <!-- 3) Error if no devices found -->
-    <include layout="@layout/layout_connect_error" />
+    <include layout="@layout/connect_error" />
 
     <!-- 4) List of devices found -->
-    <include layout="@layout/layout_connect_select_device" />
+    <include layout="@layout/connect_select_device" />
 
     <!-- 5) Connecting prompt -->
-    <include layout="@layout/layout_connecting_device" />
+    <include layout="@layout/connecting_device" />
 
     <!-- 6) Successful connection -->
-    <include layout="@layout/layout_device_connected" />
+    <include layout="@layout/connected" />
 
 </ViewFlipper>
