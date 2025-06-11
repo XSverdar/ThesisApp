@@ -23,6 +23,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".ConnectPromptActivity" />
+        <activity android:name=".TrackNoSwimmerActivity" />
+        <activity android:name=".TrackSwimmerSelectionActivity" />
+        <activity android:name=".HistoryListActivity" />
+        <activity android:name=".SwimmerListActivity" />
+        <activity android:name=".SettingsActivity" />
     </application>
 
 </manifest>
