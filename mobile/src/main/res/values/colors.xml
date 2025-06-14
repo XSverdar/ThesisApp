@@ -6,7 +6,8 @@
     <color name="text">#2C6D6A</color>
 
     <!-- _MAIN_DASHBOARD -->
-    <color name="main">#BAF2F2</color>
+    <color name="connect">#BAF2F2</color>
+    <color name="disconnect">#A4ECC2</color>
     <color name="dashboard_button">#CEE5FA</color>
     <color name="disabled">#C6D6E5</color>
     <color name="disabled_text">#838E98</color>

@@ -15,6 +15,7 @@
         android:gravity="center">
 
         <ImageButton
+            android:id="@+id/btnReturn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_back"
@@ -69,40 +70,30 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp">
 
-        <RadioButton
-            android:id="@+id/swimmer1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Ryan Suarez"
-            style="@style/CustomRadioButton" />
-
-        <RadioButton
-            android:id="@+id/swimmer2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Amber Tongson"
-            style="@style/CustomRadioButton" />
-
-        <RadioButton
-            android:id="@+id/swimmer3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Alexander Chu"
-            style="@style/CustomRadioButton" />
-
-        <RadioButton
-            android:id="@+id/swimmer4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Joan Perez"
-            style="@style/CustomRadioButton" />
+<!--        <RadioButton-->
+<!--            android:id="@+id/swimmer1"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Ryan Suarez"-->
+<!--            style="@style/CustomRadioButton" />-->
     </RadioGroup>
 
     <Button
-        android:id="@+id/continueButton"
+        android:id="@+id/btnAddSwimmer"
         android:layout_width="300dp"
         android:layout_height="60sp"
         android:layout_marginTop="32dp"
+        android:text="Add Swimmer"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="@android:color/black"
+        android:backgroundTint="@color/button" />
+
+    <Button
+        android:id="@+id/btnContinue"
+        android:layout_width="300dp"
+        android:layout_height="60sp"
+        android:layout_marginTop="20dp"
         android:text="Continue"
         android:textSize="20sp"
         android:textStyle="bold"

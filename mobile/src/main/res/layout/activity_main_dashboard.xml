@@ -38,7 +38,7 @@
         android:layout_height="250dp"
         android:layout_marginTop="20dp"
         android:paddingTop="10dp"
-        android:backgroundTint="@color/main"
+        android:backgroundTint="@color/connect"
         android:drawableTop="@drawable/ic_watch"
         android:gravity="center"
         android:shape="oval"
@@ -67,7 +67,8 @@
             android:drawableTop="@drawable/ic_swim_off"
             android:text="Start Tracking"
             android:textColor="@color/disabled_text"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:enabled="false" />
 
         <Button
             android:id="@+id/btnViewHistory"

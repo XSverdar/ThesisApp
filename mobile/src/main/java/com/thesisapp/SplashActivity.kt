@@ -12,11 +12,10 @@ class SplashActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
 
-        // Delay for 3 seconds, then move to MainDashboardActivity
         Handler(Looper.getMainLooper()).postDelayed({
-            val intent = Intent(this, MainDashboardActivity::class.java)
+            val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
-            finish() // Prevent user from returning to splash
-        }, 3000) // 3000 milliseconds = 3 seconds
+            finish()
+        }, 2000)
     }
 }
