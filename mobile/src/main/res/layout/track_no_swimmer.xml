@@ -88,5 +88,4 @@
         android:textColor="@color/white"
         android:textAllCaps="false"
         android:backgroundTint="@color/button" />
-
 </LinearLayout>

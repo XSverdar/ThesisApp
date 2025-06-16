@@ -3,7 +3,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:gravity="center_horizontal"
     android:padding="16dp"
     android:background="@color/background">
 
@@ -14,21 +13,20 @@
         android:gravity="center">
 
         <ImageButton
-            android:id="@+id/btnBack"
+            android:id="@+id/btnReturn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_back"
-            android:background="@android:color/transparent"
+            android:background="?attr/selectableItemBackground"
             android:contentDescription="Back" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
             android:text="History"
             android:textSize="30sp"
             android:textStyle="bold"
-            android:textColor="@color/text" />
+            android:layout_marginStart="10dp" />
     </LinearLayout>
 
     <View
@@ -40,78 +38,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="List of Sessions"
-        android:textStyle="bold"
         android:textSize="24sp"
-        android:layout_marginTop="12dp"
-        android:textColor="@color/text" />
+        android:textStyle="bold"
+        android:layout_marginTop="12dp" />
 
-    <ScrollView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewSessions"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:layout_marginTop="8dp">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <!-- Session Item -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="12dp"
-                android:background="@android:color/white"
-                android:layout_marginBottom="4dp"
-                android:foreground="?attr/selectableItemBackground">
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/tvDate"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="February 11, 2025"
-                        android:textStyle="bold"
-                        android:textSize="20sp"
-                        android:textColor="@color/text" />
-
-                    <TextView
-                        android:id="@+id/tvTime"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Time: 6:10 AM"
-                        android:textSize="16sp"
-                        android:textColor="@color/details" />
-
-                    <TextView
-                        android:id="@+id/tvSwimmer"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Swimmer: Nathan Mangulabnan"
-                        android:textSize="16sp"
-                        android:textColor="@color/details" />
-                </LinearLayout>
-
-                <Button
-                    android:id="@+id/btnViewDetails"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:backgroundTint="@android:color/transparent"
-                    android:text="View Details"
-                    android:textColor="@color/link_blue"
-                    android:textSize="14sp" />
-            </LinearLayout>
-
-            <!-- Add more session blocks here -->
-
-        </LinearLayout>
-    </ScrollView>
-
+        android:layout_marginTop="8dp" />
 </LinearLayout>

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -17,15 +17,16 @@
             android:gravity="center">
 
             <ImageButton
+                android:id="@+id/btnReturn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_back"
-                android:background="@android:color/transparent" />
+                android:background="?attr/selectableItemBackground" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="History"
+                android:text="Session Details"
                 android:textSize="30sp"
                 android:textStyle="bold"
                 android:layout_marginStart="10dp" />
@@ -36,102 +37,69 @@
             android:layout_height="2dp"
             android:background="?android:attr/listDivider" />
 
+        <!-- Detail Section -->
         <TextView
-            android:layout_width="wrap_content"
+            android:id="@+id/tvDateDetails"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Session Details"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:textColor="@color/text"
-            android:gravity="center"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="16dp" />
+            android:text="Date: "
+            android:textSize="18sp"
+            android:layout_marginTop="24dp" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:id="@+id/tvSwimmerDetails"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Date: February 11, 2025"
-            android:textStyle="bold"
-            android:layout_marginTop="16dp" />
+            android:text="Swimmer: "
+            android:textSize="18sp"
+            android:layout_marginTop="8dp" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:id="@+id/tvStartTimeDetails"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Swimmer: Ryan Suarez"
-            android:layout_marginTop="4dp" />
+            android:text="Start: "
+            android:textSize="18sp"
+            android:layout_marginTop="8dp" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:id="@+id/tvEndTimeDetails"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Session Duration: 1hr, 25min"
-            android:textStyle="bold"
-            android:layout_marginTop="16dp" />
+            android:text="End: "
+            android:textSize="18sp"
+            android:layout_marginTop="8dp" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:id="@+id/tvDistanceDetails"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Start: 6:10 AM"
-            android:layout_marginTop="4dp" />
+            android:text="Distance: "
+            android:textSize="18sp"
+            android:layout_marginTop="8dp" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:id="@+id/tvStrokeDetails"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="End: 7:35 AM"
-            android:layout_marginTop="2dp" />
+            android:text="Stroke: "
+            android:textSize="18sp"
+            android:layout_marginTop="8dp" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:id="@+id/tvPaceDetails"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Stroke Type Breakdown:"
-            android:textStyle="bold"
-            android:layout_marginTop="16dp" />
+            android:text="Average Pace: "
+            android:textSize="18sp"
+            android:layout_marginTop="8dp" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:id="@+id/tvNotesDetails"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Freestyle:" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Breaststroke:" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Backstroke:" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Butterfly:" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Pace Per Stroke Type:"
-            android:textStyle="bold"
-            android:layout_marginTop="16dp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Freestyle:" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Breaststroke:" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Backstroke:" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Butterfly:" />
+            android:text="Notes: "
+            android:textSize="18sp"
+            android:layout_marginTop="8dp" />
     </LinearLayout>
-
 </ScrollView>

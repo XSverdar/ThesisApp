@@ -107,5 +107,4 @@
             android:textColor="@color/black"
             android:textStyle="bold" />
     </GridLayout>
-
 </LinearLayout>

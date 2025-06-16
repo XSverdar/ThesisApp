@@ -59,7 +59,7 @@ class MainActivity : AppCompatActivity() {
 
 
         btnViewHistory.setOnClickListener {
-            Toast.makeText(this, "View History clicked!", Toast.LENGTH_SHORT).show()
+            startActivity(Intent(this, HistoryListActivity::class.java))
         }
 
         btnManageSwimmers.setOnClickListener {

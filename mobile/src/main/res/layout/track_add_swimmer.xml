@@ -92,5 +92,4 @@
         android:drawableRight="@drawable/ic_next"
         android:layout_gravity="center"
         tools:ignore="RtlSymmetry" />
-
 </LinearLayout>
