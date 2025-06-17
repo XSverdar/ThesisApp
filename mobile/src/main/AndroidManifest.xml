@@ -22,6 +22,14 @@
         </activity>
 
         <activity android:name=".presentation.MainActivity" />
+        <activity android:name=".presentation.TrackSwimmerSelectionActivity" />
+        <activity android:name=".presentation.TrackNoSwimmerActivity" />
+        <activity android:name=".presentation.TrackAddSwimmerActivity" />
+        <activity android:name=".presentation.TrackSwimmerSuccessActivity" />
+        <activity android:name=".presentation.TrackSwimmerActivity" />
+        <activity android:name=".presentation.HistoryListActivity" />
+        <activity android:name=".presentation.HistorySessionActivity" />
+        <activity android:name=".presentation.SettingsActivity" />
     </application>
 
 </manifest>

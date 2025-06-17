@@ -1,5 +1,6 @@
 package com.thesisapp.presentation
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
@@ -47,16 +48,19 @@ class TrackAddSwimmerActivity : AppCompatActivity() {
                 val swimmer = Swimmer(name = name, age = age, category = cat)
 
                 lifecycleScope.launch {
-                    dao.insertSwimmer(swimmer)
-                    Toast.makeText(this@TrackAddSwimmerActivity, "Swimmer added!", Toast.LENGTH_SHORT).show()
-                    finish()
+                    try {
+                        dao.insertSwimmer(swimmer)
+                        startActivity(Intent(this@TrackAddSwimmerActivity, TrackSwimmerSuccessActivity::class.java))
+                        finish()
+                    } catch (e: Exception) {
+                        Toast.makeText(this@TrackAddSwimmerActivity, "Failed to add swimmer: ${e.message}", Toast.LENGTH_SHORT).show()
+                    }
                 }
             } else {
                 Toast.makeText(this, "Please fill all fields.", Toast.LENGTH_SHORT).show()
             }
         }
 
-        // Handle back button
         btnReturn.setOnClickListener {
             finish()
         }

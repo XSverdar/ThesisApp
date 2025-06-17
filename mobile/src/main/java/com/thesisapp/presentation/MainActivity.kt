@@ -71,17 +71,17 @@ class MainActivity : AppCompatActivity() {
         }
 
         btnViewHistory.setOnClickListener {
-            startActivity(Intent(this, HistoryListActivity::class.java))
+            val intent = Intent(this, HistoryListActivity::class.java)
+            startActivity(intent)
         }
 
         btnManageSwimmers.setOnClickListener {
             Toast.makeText(this, "Manage Swimmers clicked!", Toast.LENGTH_SHORT).show()
-            val intent = Intent(this, TrackAddSwimmerActivity::class.java)
-            startActivity(intent)
         }
 
         btnSettings.setOnClickListener {
-            startActivity(Intent(this, SettingsActivity::class.java))
+            val intent = Intent(this, SettingsActivity::class.java)
+            startActivity(intent)
         }
     }
 
