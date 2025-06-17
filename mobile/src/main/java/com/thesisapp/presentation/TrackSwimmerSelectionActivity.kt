@@ -1,13 +1,12 @@
-package com.thesisapp
+package com.thesisapp.presentation
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import android.widget.Button
-import com.thesisapp.adapter.SwimmerAdapter
-import com.thesisapp.model.Swimmer
+import com.thesisapp.R
 
 class TrackSwimmerSelectionActivity : AppCompatActivity() {
 

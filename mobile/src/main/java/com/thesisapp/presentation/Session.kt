@@ -1,4 +1,4 @@
-package com.thesisapp
+package com.thesisapp.presentation
 
 data class Session(
     val date: String,

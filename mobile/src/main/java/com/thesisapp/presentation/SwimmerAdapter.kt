@@ -1,11 +1,10 @@
-package com.thesisapp.adapter
+package com.thesisapp.presentation
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.RadioButton
 import androidx.recyclerview.widget.RecyclerView
-import com.thesisapp.model.Swimmer
 import com.thesisapp.R
 
 class SwimmerAdapter(

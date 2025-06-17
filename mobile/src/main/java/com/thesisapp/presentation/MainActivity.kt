@@ -1,4 +1,4 @@
-package com.thesisapp
+package com.thesisapp.presentation
 
 import android.content.ActivityNotFoundException
 import android.content.Intent
@@ -6,13 +6,22 @@ import android.net.Uri
 import android.os.Bundle
 import android.widget.Button
 import android.widget.Toast
+import android.widget.TextView
+import android.widget.ImageView
+import android.content.ContentResolver
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.lifecycleScope
+import com.thesisapp.R
+import com.thesisapp.data.AppDatabase
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var btnConnect: Button
     private var isSmartwatchConnected = false
+    private lateinit var db: AppDatabase
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,18 +33,20 @@ class MainActivity : AppCompatActivity() {
         val btnManageSwimmers = findViewById<Button>(R.id.btnManageSwimmers)
         val btnSettings = findViewById<Button>(R.id.btnSettings)
 
+        // Initialize Database
+        db = AppDatabase.getDatabase(this)
+
         // Initial button setup
         updateSmartwatchButton()
 
         btnConnect.setOnClickListener {
             if (!isSmartwatchConnected) {
-                // Attempt to open Google Wear OS app
+                // Attempt to connect
                 openGoogleWatchApp()
-                // For demonstration: assume connection succeeds after opening
                 isSmartwatchConnected = true
                 updateSmartwatchButton()
             } else {
-                // Simulate disconnect
+                // Disconnect
                 isSmartwatchConnected = false
                 updateSmartwatchButton()
                 Toast.makeText(this, "Smartwatch disconnected", Toast.LENGTH_SHORT).show()
@@ -44,19 +55,20 @@ class MainActivity : AppCompatActivity() {
 
         btnStartTracking.setOnClickListener {
             if (isSmartwatchConnected) {
-                val swimmers = DatabaseHelper(this).getAllSwimmers()
-                if (swimmers.isNotEmpty()) {
-                    // Navigate to track_swimmer_selection
-                    val intent = Intent(this, TrackSwimmerSelectionActivity::class.java)
-                    startActivity(intent)
-                } else {
-                    // Navigate to track_no_swimmer
-                    val intent = Intent(this, TrackNoSwimmerActivity::class.java)
-                    startActivity(intent)
+                lifecycleScope.launch {
+                    val swimmers = db.swimmerDao().getAllSwimmers()
+                    if (swimmers.isNotEmpty()) {
+                        // Navigate to track_swimmer_selection
+                        val intent = Intent(this@MainActivity, TrackSwimmerSelectionActivity::class.java)
+                        startActivity(intent)
+                    } else {
+                        // Navigate to track_no_swimmer
+                        val intent = Intent(this@MainActivity, TrackNoSwimmerActivity::class.java)
+                        startActivity(intent)
+                    }
                 }
             }
         }
-
 
         btnViewHistory.setOnClickListener {
             startActivity(Intent(this, HistoryListActivity::class.java))
@@ -64,17 +76,20 @@ class MainActivity : AppCompatActivity() {
 
         btnManageSwimmers.setOnClickListener {
             Toast.makeText(this, "Manage Swimmers clicked!", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, TrackAddSwimmerActivity::class.java)
+            startActivity(intent)
         }
 
         btnSettings.setOnClickListener {
-            Toast.makeText(this, "Settings clicked!", Toast.LENGTH_SHORT).show()
+            startActivity(Intent(this, SettingsActivity::class.java))
         }
     }
 
     private fun updateSmartwatchButton() {
         if (isSmartwatchConnected) {
             btnConnect.text = "Disconnect Smartwatch"
-            btnConnect.backgroundTintList = ContextCompat.getColorStateList(this, R.color.disconnect)
+            btnConnect.backgroundTintList =
+                ContextCompat.getColorStateList(this, R.color.disconnect)
 
             // Enable Start button
             val btnStart = findViewById<Button>(R.id.btnStartTracking)

@@ -1,4 +1,4 @@
-package com.thesisapp.model
+package com.thesisapp.presentation
 
 data class Swimmer (
     val id: Int,

@@ -1,11 +1,12 @@
-package com.thesisapp
+package com.thesisapp.presentation
 
 import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.thesisapp.R
 
 class HistoryListActivity : AppCompatActivity() {
 

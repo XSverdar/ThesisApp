@@ -1,4 +1,4 @@
-package com.thesisapp
+package com.thesisapp.presentation
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.thesisapp.R
 
 class HistoryListAdapter(
     private val sessions: List<Session>,

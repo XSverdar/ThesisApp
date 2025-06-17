@@ -1,10 +1,11 @@
-package com.thesisapp
+package com.thesisapp.presentation
 
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
+import com.thesisapp.R
 
 class SplashActivity : AppCompatActivity() {
 

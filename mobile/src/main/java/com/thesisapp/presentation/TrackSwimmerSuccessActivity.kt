@@ -1,9 +1,10 @@
-package com.thesisapp
+package com.thesisapp.presentation
 
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
+import com.thesisapp.R
 
 class TrackSwimmerSuccessActivity : AppCompatActivity() {
 
