@@ -4,91 +4,103 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background"
-    android:orientation="vertical"
     android:gravity="center_horizontal"
+    android:orientation="vertical"
     android:padding="24dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="80dp"
-        android:orientation="horizontal"
-        android:gravity="center">
+        android:gravity="center"
+        android:orientation="horizontal">
 
         <ImageButton
             android:id="@+id/btnReturn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_back"
-            android:background="@android:color/transparent" />
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_back" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:text="TRACKING"
-            android:textSize="30sp"
+            android:textColor="@color/black"
+            android:textSize="30dp"
             android:textStyle="bold" />
     </LinearLayout>
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="?android:attr/listDivider" />
+        android:layout_height="1dp"
+        android:background="@color/divider" />
 
     <TextView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Add a Swimmer"
-        android:textColor="@color/text"
-        android:textSize="24sp"
-        android:textStyle="bold"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="25dp"
         android:gravity="center"
-        android:layout_marginTop="24dp"
-        android:layout_marginBottom="16dp"/>
+        android:text="Swimmer Registration"
+        android:textColor="@color/text"
+        android:textSize="24dp"
+        android:textStyle="bold" />
 
     <EditText
         android:id="@+id/inputSwimmerName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/border_box"
         android:hint="Enter Swimmer’s Name:"
-        android:background="@drawable/border_button"
         android:padding="12dp"
-        android:textColorHint="@color/sub"
-        android:layout_marginBottom="16dp" />
+        android:textColorHint="@color/sub" />
 
     <EditText
         android:id="@+id/inputSwimmerAge"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/border_box"
         android:hint="Enter Swimmer’s Age:"
-        android:background="@drawable/border_button"
-        android:padding="12dp"
         android:inputType="number"
-        android:textColorHint="@color/sub"
-        android:layout_marginBottom="16dp" />
+        android:padding="12dp"
+        android:textColorHint="@color/sub" />
+
+    <EditText
+        android:id="@+id/inputSwimmerWing"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/border_box"
+        android:hint="Enter Swimmer’s Wingspan:"
+        android:inputType="numberDecimal"
+        android:padding="12dp"
+        android:textColorHint="@color/sub" />
 
     <EditText
         android:id="@+id/inputSwimmerCategory"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        android:background="@drawable/border_box"
         android:hint="Enter Swimmer’s Category:"
-        android:background="@drawable/border_button"
         android:padding="12dp"
-        android:textColorHint="@color/sub"
-        android:layout_marginBottom="32dp" />
+        android:textColorHint="@color/sub" />
 
     <Button
         android:id="@+id/btnNext"
         android:layout_width="300dp"
-        android:layout_height="60sp"
-        android:text="Next"
+        android:layout_height="60dp"
+        android:layout_gravity="center"
         android:backgroundTint="@color/button"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        android:textStyle="bold"
+        android:drawableRight="@drawable/ic_next"
         android:paddingStart="100dp"
         android:paddingEnd="100dp"
-        android:drawableRight="@drawable/ic_next"
-        android:layout_gravity="center"
+        android:text="Next"
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        android:textStyle="bold"
         tools:ignore="RtlSymmetry" />
 </LinearLayout>

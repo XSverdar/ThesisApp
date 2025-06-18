@@ -6,10 +6,12 @@ import androidx.room.Query
 
 @Dao
 interface SwimmerDao {
+    @Query("SELECT * FROM swimmers")
+    fun getAllSwimmers(): List<Swimmer>
 
     @Insert
-    suspend fun insertSwimmer(swimmer: Swimmer)
+    fun insertSwimmer(swimmer: Swimmer)
 
-    @Query("SELECT * FROM swimmer")
-    suspend fun getAllSwimmers(): List<Swimmer>
+    @Query("DELETE FROM swimmers")
+    fun clearAll()
 }

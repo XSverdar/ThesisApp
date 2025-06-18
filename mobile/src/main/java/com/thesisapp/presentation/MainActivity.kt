@@ -6,22 +6,16 @@ import android.net.Uri
 import android.os.Bundle
 import android.widget.Button
 import android.widget.Toast
-import android.widget.TextView
-import android.widget.ImageView
-import android.content.ContentResolver
-import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.lifecycleScope
+import androidx.room.Room
 import com.thesisapp.R
 import com.thesisapp.data.AppDatabase
-import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var btnConnect: Button
     private var isSmartwatchConnected = false
-    private lateinit var db: AppDatabase
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,23 +24,19 @@ class MainActivity : AppCompatActivity() {
         btnConnect = findViewById(R.id.btnConnect)
         val btnStartTracking = findViewById<Button>(R.id.btnStartTracking)
         val btnViewHistory = findViewById<Button>(R.id.btnViewHistory)
-        val btnManageSwimmers = findViewById<Button>(R.id.btnManageSwimmers)
         val btnSettings = findViewById<Button>(R.id.btnSettings)
 
-        // Initialize Database
-        db = AppDatabase.getDatabase(this)
-
-        // Initial button setup
         updateSmartwatchButton()
 
         btnConnect.setOnClickListener {
             if (!isSmartwatchConnected) {
-                // Attempt to connect
+                // Attempt to open Google Wear OS app
                 openGoogleWatchApp()
+                // For demonstration: assume connection succeeds after opening
                 isSmartwatchConnected = true
                 updateSmartwatchButton()
             } else {
-                // Disconnect
+                // Simulate disconnect
                 isSmartwatchConnected = false
                 updateSmartwatchButton()
                 Toast.makeText(this, "Smartwatch disconnected", Toast.LENGTH_SHORT).show()
@@ -55,44 +45,38 @@ class MainActivity : AppCompatActivity() {
 
         btnStartTracking.setOnClickListener {
             if (isSmartwatchConnected) {
-                lifecycleScope.launch {
-                    val swimmers = db.swimmerDao().getAllSwimmers()
-                    if (swimmers.isNotEmpty()) {
-                        // Navigate to track_swimmer_selection
-                        val intent = Intent(this@MainActivity, TrackSwimmerSelectionActivity::class.java)
-                        startActivity(intent)
-                    } else {
-                        // Navigate to track_no_swimmer
-                        val intent = Intent(this@MainActivity, TrackNoSwimmerActivity::class.java)
-                        startActivity(intent)
-                    }
+                val db = Room.databaseBuilder(
+                    applicationContext,
+                    AppDatabase::class.java, "swimmers"
+                ).allowMainThreadQueries().build()
+
+                val swimmers = db.swimmerDao().getAllSwimmers()
+
+                val intent = if (swimmers.isNotEmpty()) {
+                    Intent(this, TrackSwimmerActivity::class.java)
+                } else {
+                    Intent(this, TrackNoSwimmerActivity::class.java)
                 }
+                startActivity(intent)
             }
         }
 
         btnViewHistory.setOnClickListener {
-            val intent = Intent(this, HistoryListActivity::class.java)
-            startActivity(intent)
-        }
-
-        btnManageSwimmers.setOnClickListener {
-            Toast.makeText(this, "Manage Swimmers clicked!", Toast.LENGTH_SHORT).show()
+            startActivity(Intent(this, HistoryListActivity::class.java))
         }
 
         btnSettings.setOnClickListener {
-            val intent = Intent(this, SettingsActivity::class.java)
-            startActivity(intent)
+            startActivity(Intent(this, SettingsActivity::class.java))
         }
     }
 
     private fun updateSmartwatchButton() {
+        val btnStart = findViewById<Button>(R.id.btnStartTracking)
+
         if (isSmartwatchConnected) {
             btnConnect.text = "Disconnect Smartwatch"
-            btnConnect.backgroundTintList =
-                ContextCompat.getColorStateList(this, R.color.disconnect)
+            btnConnect.backgroundTintList = ContextCompat.getColorStateList(this, R.color.disconnect)
 
-            // Enable Start button
-            val btnStart = findViewById<Button>(R.id.btnStartTracking)
             btnStart.isEnabled = true
             btnStart.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_swim_on, 0, 0, 0)
             btnStart.setTextColor(ContextCompat.getColor(this, R.color.black))
@@ -100,8 +84,6 @@ class MainActivity : AppCompatActivity() {
             btnConnect.text = "Connect Smartwatch"
             btnConnect.backgroundTintList = ContextCompat.getColorStateList(this, R.color.connect)
 
-            // Disable Start button
-            val btnStart = findViewById<Button>(R.id.btnStartTracking)
             btnStart.isEnabled = false
             btnStart.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_swim_off, 0, 0, 0)
             btnStart.setTextColor(ContextCompat.getColor(this, R.color.disabled_text))
@@ -110,13 +92,13 @@ class MainActivity : AppCompatActivity() {
 
     private fun openGoogleWatchApp() {
         try {
-            val intent = packageManager.getLaunchIntentForPackage("com.google.android.wearable.app")
+            val intent = packageManager.getLaunchIntentForPackage("com.google.android.apps.wear.companion")
             if (intent != null) {
                 startActivity(intent)
             } else {
                 // If Wear app not found, open Play Store
                 val playIntent = Intent(Intent.ACTION_VIEW)
-                playIntent.data = Uri.parse("market://details?id=com.google.android.wearable.app")
+                playIntent.data = Uri.parse("market://details?id=com.google.android.apps.wear.companion")
                 startActivity(playIntent)
             }
         } catch (e: ActivityNotFoundException) {

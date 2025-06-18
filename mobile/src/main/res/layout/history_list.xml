@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp"
+    android:gravity="center_horizontal"
+    android:padding="24dp"
     android:background="@color/background">
 
     <LinearLayout
@@ -16,36 +17,37 @@
             android:id="@+id/btnReturn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_back"
             android:background="?attr/selectableItemBackground"
-            android:contentDescription="Back" />
+            android:src="@drawable/ic_back" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
             android:text="History"
-            android:textSize="30sp"
-            android:textStyle="bold"
-            android:layout_marginStart="10dp" />
+            android:textColor="@color/black"
+            android:textSize="30dp"
+            android:textStyle="bold" />
     </LinearLayout>
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="?android:attr/listDivider" />
+        android:layout_height="1dp"
+        android:background="@color/divider" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
         android:text="List of Sessions"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:layout_marginTop="12dp" />
+        android:textColor="@color/text"
+        android:textSize="24dp"
+        android:textStyle="bold" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewSessions"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:layout_marginTop="8dp" />
+        android:layout_marginTop="8dp"
+        android:layout_weight="1" />
 </LinearLayout>

@@ -10,7 +10,6 @@ class HistorySessionActivity : AppCompatActivity() {
 
     private lateinit var btnReturn: ImageButton
     private lateinit var tvDateDetails: TextView
-    private lateinit var tvSwimmerDetails: TextView
     private lateinit var tvStartTimeDetails: TextView
     private lateinit var tvEndTimeDetails: TextView
     private lateinit var tvDistanceDetails: TextView
@@ -24,7 +23,6 @@ class HistorySessionActivity : AppCompatActivity() {
 
         btnReturn = findViewById(R.id.btnReturn)
         tvDateDetails = findViewById(R.id.tvDateDetails)
-        tvSwimmerDetails = findViewById(R.id.tvSwimmerDetails)
         tvStartTimeDetails = findViewById(R.id.tvStartTimeDetails)
         tvEndTimeDetails = findViewById(R.id.tvEndTimeDetails)
         tvDistanceDetails = findViewById(R.id.tvDistanceDetails)
@@ -42,7 +40,6 @@ class HistorySessionActivity : AppCompatActivity() {
         val notes = intent.getStringExtra("notes")
 
         if (date != null) tvDateDetails.text = "Date: $date"
-        if (swimmer != null) tvSwimmerDetails.text = "Swimmer: $swimmer"
         if (startTime != null) tvStartTimeDetails.text = "Start: $startTime"
         if (endTime != null) tvEndTimeDetails.text = "End: $endTime"
         if (distance != null) tvDistanceDetails.text = "Distance: $distance m"

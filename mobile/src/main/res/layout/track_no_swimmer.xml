@@ -3,65 +3,66 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:background="@color/background"
     android:gravity="center_horizontal"
-    android:padding="24dp"
-    android:background="@color/background">
+    android:orientation="vertical"
+    android:padding="24dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="80dp"
-        android:orientation="horizontal"
-        android:gravity="center">
+        android:gravity="center"
+        android:orientation="horizontal">
 
         <ImageButton
             android:id="@+id/btnReturn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_back"
-            android:background="@android:color/transparent" />
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_back" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:text="TRACKING"
-            android:textSize="30sp"
+            android:textColor="@color/black"
+            android:textSize="30dp"
             android:textStyle="bold" />
     </LinearLayout>
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="?android:attr/listDivider" />
+        android:layout_height="1dp"
+        android:background="@color/divider" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="30dp"
         android:layout_marginBottom="30dp"
         android:paddingStart="20dp"
         android:paddingEnd="20dp"
-        android:text="Connected to Google Pixel Watch 2"
-        android:textSize="17sp"
-        android:textStyle="bold"
-        android:textColor="@color/text"
-        android:gravity="center_vertical"
+        android:background="@drawable/green_box"
         android:drawableLeft="@drawable/ic_check"
         android:drawablePadding="12dp"
-        android:background="@drawable/green_box"
         android:elevation="10dp"
+        android:gravity="center_vertical"
+        android:text="Connected to Google Pixel Watch 2"
+        android:textColor="@color/text"
+        android:textSize="16dp"
+        android:textStyle="bold"
         tools:ignore="RtlSymmetry" />
 
     <TextView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
         android:layout_marginBottom="24dp"
         android:text="Choose your Swimmer"
-        android:textSize="24sp"
-        android:textStyle="bold"
         android:textColor="@color/register"
-        android:gravity="center" />
+        android:textSize="24dp"
+        android:textStyle="bold" />
 
     <ImageView
         android:layout_width="100dp"
@@ -70,22 +71,22 @@
         android:src="@drawable/ic_swim_on" />
 
     <TextView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="32dp"
         android:text="You don’t have any entries yet\nAdd your first one now"
-        android:textStyle="bold"
+        android:textAlignment="center"
         android:textColor="@color/register"
-        android:gravity="center" />
+        android:textStyle="bold" />
 
     <Button
         android:id="@+id/btnAddSwimmer"
         android:layout_width="300dp"
         android:layout_height="60dp"
+        android:backgroundTint="@color/button"
         android:text="+ Add a Swimmer"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:textColor="@color/white"
         android:textAllCaps="false"
-        android:backgroundTint="@color/button" />
+        android:textColor="@color/white"
+        android:textSize="20dp"
+        android:textStyle="bold" />
 </LinearLayout>

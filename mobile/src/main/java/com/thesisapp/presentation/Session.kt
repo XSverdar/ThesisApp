@@ -3,7 +3,6 @@ package com.thesisapp.presentation
 data class Session(
     val date: String,
     val time: String,
-    val swimmer: String,
     val startTime: String,
     val endTime: String,
     val distance: String = "Unknown",

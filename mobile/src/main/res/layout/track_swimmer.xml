@@ -1,63 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="24dp"
+    android:background="@color/background"
     android:gravity="center_horizontal"
-    android:background="@color/background">
+    android:orientation="vertical"
+    android:padding="24dp">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center_horizontal">
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="80dp"
-            android:orientation="horizontal"
-            android:gravity="center">
+            android:gravity="center"
+            android:orientation="horizontal">
 
             <ImageButton
+                android:id="@+id/btnReturn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_back"
                 android:background="@android:color/transparent"
-                android:contentDescription="Back" />
+                android:src="@drawable/ic_back" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:text="TRACKING"
-                android:textSize="30sp"
+                android:textColor="@color/black"
+                android:textSize="30dp"
                 android:textStyle="bold" />
         </LinearLayout>
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:background="?android:attr/listDivider" />
+            android:layout_height="1dp"
+            android:background="@color/divider" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="Swimmer: Ryan Suarez"
-            android:textStyle="bold" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Watch Connection: Google Pixel Watch 2"
-            android:textColor="@color/text" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="30dp"
             android:text="REAL-TIME VISUALIZATION"
             android:textColor="@color/link_blue"
+            android:textSize="18dp"
             android:textStyle="bold" />
 
         <View
@@ -77,10 +67,17 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="20dp"
             android:text="Current Total Time: 00:00:00"
             android:textColor="@color/black"
+            android:textSize="16dp"
             android:textStyle="bold" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:layout_marginTop="5dp"
+            android:background="?android:attr/listDivider" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -88,72 +85,91 @@
             android:layout_marginTop="8dp"
             android:text="Identified Stroke:"
             android:textColor="@color/stroke"
+            android:textSize="16dp"
             android:textStyle="bold" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:orientation="horizontal"
-            android:gravity="center">
+            android:gravity="center"
+            android:orientation="horizontal">
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="N/A" />
+                android:text="Butterfly"
+                android:textColor="@color/track"
+                android:textSize="20dp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="00:00:00" />
+                android:text="00:00:00"
+                android:textColor="@color/track"
+                android:textSize="16dp" />
         </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:layout_marginTop="20dp"
+            android:background="?android:attr/listDivider" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:orientation="horizontal"
-            android:gravity="center">
+            android:paddingHorizontal="16dp"
+            android:gravity="center_horizontal">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="BPM: 0" />
+                android:layout_weight="1"
+                android:text="BPM: 0"
+                android:textSize="16dp" />
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="120sp"
-                android:text="Distance: 0m" />
+                android:layout_weight="1"
+                android:gravity="end"
+                android:text="Distance: 0m"
+                android:textSize="16dp" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:orientation="horizontal"
-            android:gravity="center">
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:orientation="horizontal">
 
             <ImageButton
+                android:id="@+id/btnPause"
                 android:layout_width="64dp"
                 android:layout_height="64dp"
-                android:src="@drawable/ic_pause"
-                android:background="@android:color/transparent" />
+                android:background="@android:color/transparent"
+                android:src="@drawable/ic_pause" />
 
             <ImageButton
-                android:layout_width="64dp"
-                android:layout_height="64dp"
-                android:layout_marginStart="16dp"
-                android:src="@drawable/ic_play"
-                android:background="@android:color/transparent" />
-
-            <ImageButton
+                android:id="@+id/btnPlay"
                 android:layout_width="64dp"
                 android:layout_height="64dp"
                 android:layout_marginStart="16dp"
-                android:src="@drawable/ic_stop"
-                android:background="@android:color/transparent" />
+                android:background="@android:color/transparent"
+                android:src="@drawable/ic_play" />
+
+            <ImageButton
+                android:id="@+id/btnStop"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:layout_marginStart="16dp"
+                android:background="@android:color/transparent"
+                android:src="@drawable/ic_stop" />
         </LinearLayout>
     </LinearLayout>
-</ScrollView>
+</LinearLayout>

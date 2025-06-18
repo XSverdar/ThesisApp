@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp"
+    android:background="@color/background"
     android:gravity="center_horizontal"
-    android:background="@color/background">
+    android:orientation="vertical"
+    android:padding="24dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="80dp"
-        android:orientation="horizontal"
-        android:gravity="center">
+        android:gravity="center"
+        android:orientation="horizontal">
 
         <ImageView
             android:layout_width="60dp"
@@ -23,88 +24,86 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:text="DASHBOARD"
-            android:textSize="30sp"
+            android:textColor="@color/black"
+            android:textSize="30dp"
             android:textStyle="bold" />
     </LinearLayout>
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="?android:attr/listDivider" />
+        android:layout_height="1dp"
+        android:background="@color/divider" />
 
     <Button
         android:id="@+id/btnConnect"
-        android:layout_width="250dp"
-        android:layout_height="250dp"
-        android:layout_marginTop="20dp"
-        android:paddingTop="10dp"
+        android:layout_width="240dp"
+        android:layout_height="240dp"
+        android:layout_marginTop="30dp"
         android:backgroundTint="@color/connect"
         android:drawableTop="@drawable/ic_watch"
         android:gravity="center"
-        android:shape="oval"
+        android:paddingTop="10dp"
         android:text="Connect Smartwatch"
         android:textAlignment="center"
         android:textColor="@color/black"
-        android:textSize="24sp"
+        android:textSize="22dp"
         android:textStyle="bold" />
 
     <GridLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:columnCount="2"
+        android:layout_marginTop="30dp"
         android:alignmentMode="alignMargins"
+        android:columnCount="2"
+        android:rowCount="2"
         android:rowOrderPreserved="false"
         android:useDefaultMargins="true">
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btnStartTracking"
-            android:layout_width="170dp"
-            android:layout_height="170dp"
-            android:layout_margin="8dp"
+            android:layout_width="310dp"
+            android:layout_height="110dp"
+            android:layout_columnSpan="2"
             android:layout_gravity="center"
-            android:background="@drawable/rect_button"
-            android:drawableTop="@drawable/ic_swim_off"
+            android:backgroundTint="@color/dashboard_button"
+            android:drawableLeft="@drawable/ic_swim_off"
+            android:enabled="false"
             android:text="Start Tracking"
             android:textColor="@color/disabled_text"
+            android:textSize="22dp"
             android:textStyle="bold"
-            android:enabled="false" />
+            app:cornerRadius="15dp"
+            app:iconGravity="start" />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btnViewHistory"
-            android:layout_width="170dp"
-            android:layout_height="170dp"
-            android:layout_margin="8dp"
+            android:layout_width="140dp"
+            android:layout_height="140dp"
             android:layout_gravity="center"
-            android:background="@drawable/rect_button"
+            android:layout_margin="8dp"
+            android:backgroundTint="@color/dashboard_button"
             android:drawableTop="@drawable/ic_history"
             android:text="View History"
             android:textColor="@color/black"
-            android:textStyle="bold" />
+            android:textSize="14dp"
+            android:textStyle="bold"
+            app:cornerRadius="15dp"
+            app:iconGravity="start" />
 
-        <Button
-            android:id="@+id/btnManageSwimmers"
-            android:layout_width="170dp"
-            android:layout_height="170dp"
-            android:layout_margin="8dp"
-            android:layout_gravity="center"
-            android:background="@drawable/rect_button"
-            android:drawableTop="@drawable/ic_calendar"
-            android:paddingTop="12dp"
-            android:text="Manage Swimmers"
-            android:textColor="@color/black"
-            android:textStyle="bold" />
-
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btnSettings"
-            android:layout_width="170dp"
-            android:layout_height="170dp"
-            android:layout_margin="8dp"
+            android:layout_width="140dp"
+            android:layout_height="140dp"
             android:layout_gravity="center"
-            android:background="@drawable/rect_button"
+            android:layout_margin="8dp"
+            android:backgroundTint="@color/dashboard_button"
             android:drawableTop="@drawable/ic_settings"
+            android:paddingTop="10dp"
             android:text="Settings"
             android:textColor="@color/black"
-            android:textStyle="bold" />
+            android:textSize="14dp"
+            android:textStyle="bold"
+            app:cornerRadius="15dp"
+            app:iconGravity="start" />
     </GridLayout>
 </LinearLayout>

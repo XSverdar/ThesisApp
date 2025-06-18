@@ -23,8 +23,6 @@ class HistoryListAdapter(
         val session = sessions[position]
         holder.tvDate.text = session.date
         holder.tvTime.text = "Time: ${session.time}"
-        holder.tvSwimmer.text = "Swimmer: ${session.swimmer}"
-
         holder.btnViewDetails.setOnClickListener {
             onViewDetailsClick(session)
         }
@@ -35,7 +33,6 @@ class HistoryListAdapter(
     class SessionViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val tvDate: TextView = itemView.findViewById(R.id.tvDate)
         val tvTime: TextView = itemView.findViewById(R.id.tvTime)
-        val tvSwimmer: TextView = itemView.findViewById(R.id.tvSwimmer)
         val btnViewDetails: Button = itemView.findViewById(R.id.btnViewDetails)
     }
 }

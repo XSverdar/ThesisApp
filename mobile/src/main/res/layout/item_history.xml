@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:padding="12dp"
-    android:background="@android:color/white"
     android:layout_marginBottom="4dp"
+    android:background="@android:color/white"
     android:foreground="?attr/selectableItemBackground">
 
     <LinearLayout
@@ -19,27 +19,28 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="February 11, 2025"
-            android:textStyle="bold"
-            android:textSize="20sp" />
+            android:textColor="@color/black"
+            android:textSize="18dp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/tvTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Time: 6:10 AM"
-            android:textSize="16sp" />
-
-        <TextView
-            android:id="@+id/tvSwimmer"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Swimmer: Nathan Mangulabnan"
-            android:textSize="16sp" />
+            android:text="Time Start: 6:10 AM"
+            android:textColor="@color/details"
+            android:textSize="16dp" />
     </LinearLayout>
 
     <Button
         android:id="@+id/btnViewDetails"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="View Details" />
+        android:text="View Details"
+        android:textColor="@color/link_blue"
+        android:textStyle="italic"
+        android:background="@android:color/transparent"
+        android:padding="0dp"
+        android:minWidth="0dp"
+        android:minHeight="0dp" />
 </LinearLayout>

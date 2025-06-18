@@ -5,26 +5,24 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
-@Database(entities = [Swimmer::class], version = 1)
+@Database(entities = [Swimmer::class, SwimData::class], version = 2)
 abstract class AppDatabase : RoomDatabase() {
-
     abstract fun swimmerDao(): SwimmerDao
+    abstract fun swimDataDao(): SwimDataDao
 
     companion object {
         @Volatile
         private var INSTANCE: AppDatabase? = null
 
-        fun getDatabase(context: Context): AppDatabase {
+        fun getInstance(context: Context): AppDatabase {
             return INSTANCE ?: synchronized(this) {
-                val instance = Room.databaseBuilder(
+                Room.databaseBuilder(
                     context.applicationContext,
                     AppDatabase::class.java,
-                    "swimmer_database"
-                ).build()
-
-                INSTANCE = instance
-
-                instance
+                    "swimmer_db"
+                )
+                    .fallbackToDestructiveMigration() // Wipes DB if schema changed (safe for dev)
+                    .build().also { INSTANCE = it }
             }
         }
     }
