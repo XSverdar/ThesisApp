@@ -1,5 +1,6 @@
 package com.thesisapp.presentation
 
+// TODO: Change the variables
 data class Session(
     val date: String,
     val time: String,

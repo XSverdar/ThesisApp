@@ -75,6 +75,7 @@ class SettingsExportActivity : AppCompatActivity() {
         }, year, month, day).show()
     }
 
+    // TODO: Check if db is working
     private fun exportSwimDataToCSV() {
         CoroutineScope(Dispatchers.IO).launch {
             val db = AppDatabase.getInstance(applicationContext)

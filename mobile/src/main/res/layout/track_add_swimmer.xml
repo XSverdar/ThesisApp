@@ -53,7 +53,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:background="@drawable/border_box"
-        android:hint="Enter Swimmer’s Name:"
+        android:hint="Enter Swimmer’s Name"
         android:padding="12dp"
         android:textColorHint="@color/sub" />
 
@@ -63,7 +63,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:background="@drawable/border_box"
-        android:hint="Enter Swimmer’s Age:"
+        android:hint="Enter Swimmer’s Age"
         android:inputType="number"
         android:padding="12dp"
         android:textColorHint="@color/sub" />
@@ -74,7 +74,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:background="@drawable/border_box"
-        android:hint="Enter Swimmer’s Wingspan:"
+        android:hint="Enter Swimmer’s Wingspan (Inches)"
         android:inputType="numberDecimal"
         android:padding="12dp"
         android:textColorHint="@color/sub" />
@@ -85,7 +85,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="32dp"
         android:background="@drawable/border_box"
-        android:hint="Enter Swimmer’s Category:"
+        android:hint="Enter Swimmer’s Category"
         android:padding="12dp"
         android:textColorHint="@color/sub" />
 

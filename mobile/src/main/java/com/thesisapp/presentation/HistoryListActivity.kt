@@ -13,6 +13,7 @@ class HistoryListActivity : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var btnReturn: ImageButton
 
+    // TODO: Change this sessions to retrieve the data from the db
     private val sessions = listOf(
         Session("February 11, 2025", "6:10 AM", "6:10 AM", "7:35 AM"),
         Session("February 12, 2025", "5:30 AM", "5:30 AM", "6:45 AM"),

@@ -2,12 +2,13 @@ package com.thesisapp.presentation
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Button
 import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import com.thesisapp.R
 
 class SettingsActivity : AppCompatActivity() {
@@ -26,47 +27,46 @@ class SettingsActivity : AppCompatActivity() {
         btnWatch = findViewById(R.id.btnWatch)
         btnClearAllData = findViewById(R.id.btnClearAllData)
 
-        // Navigate to settings_export.xml screen
         btnExport.setOnClickListener {
             val intent = Intent(this, SettingsExportActivity::class.java)
             startActivity(intent)
         }
 
-        // Show connection status
         btnWatch.setOnClickListener {
-            // You could improve this with live connection status using NodeClient if needed
             Toast.makeText(this, "Smartwatch Connection: Under Development", Toast.LENGTH_SHORT).show()
         }
 
-        // Show confirmation popup for clearing all data
         btnClearAllData.setOnClickListener {
             showClearDataPopup()
         }
 
-        // Return to dashboard
         btnReturn.setOnClickListener {
             finish()
         }
     }
 
     private fun showClearDataPopup() {
-        val dialogView = layoutInflater.inflate(R.layout.settings_clear, null)
-
-        val alertDialog = AlertDialog.Builder(this)
-            .setView(dialogView)
+        AlertDialog.Builder(this)
+            .setTitle("Confirm Clear All Data")
+            .setMessage("This will clear ALL SWIM DATA from the database.")
             .setCancelable(false)
-            .create()
+            .setNegativeButton("Cancel") { dialog, _ ->
+                dialog.dismiss()
+            }
+            .setPositiveButton("OK") { dialog, _ ->
+                // TODO: Check if db is working
+                val db = com.thesisapp.data.AppDatabase.getInstance(this)
 
-        dialogView.findViewById<Button>(R.id.btnCancel).setOnClickListener {
-            alertDialog.dismiss()
-        }
+                kotlinx.coroutines.CoroutineScope(kotlinx.coroutines.Dispatchers.IO).launch {
+                    db.swimDataDao().clearAll()
 
-        dialogView.findViewById<Button>(R.id.btnOK).setOnClickListener {
-            // TODO: Clear all local database entries
-            Toast.makeText(this, "All data cleared", Toast.LENGTH_SHORT).show()
-            alertDialog.dismiss()
-        }
+                    withContext(kotlinx.coroutines.Dispatchers.Main) {
+                        Toast.makeText(this@SettingsActivity, "Swim data cleared", Toast.LENGTH_SHORT).show()
+                    }
+                }
 
-        alertDialog.show()
+                dialog.dismiss()
+            }
+            .show()
     }
 }

@@ -23,6 +23,6 @@ class TrackSwimmerActivity : AppCompatActivity() {
             finish()
         }
 
-        // Here you would implement actual tracking
+        // TODO: Implement actual tracking
     }
 }

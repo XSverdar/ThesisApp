@@ -2,7 +2,6 @@ package com.thesisapp.presentation
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
@@ -11,6 +10,10 @@ import androidx.appcompat.app.AppCompatActivity
 import com.thesisapp.R
 import com.thesisapp.data.AppDatabase
 import com.thesisapp.data.Swimmer
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class TrackAddSwimmerActivity : AppCompatActivity() {
 
@@ -58,13 +61,15 @@ class TrackAddSwimmerActivity : AppCompatActivity() {
                 category = category
             )
 
-            Thread {
+            // TODO: Check if db is working
+            CoroutineScope(Dispatchers.IO).launch {
                 db.swimmerDao().insertSwimmer(swimmer)
-                runOnUiThread {
-                    Toast.makeText(this, "Swimmer saved!", Toast.LENGTH_SHORT).show()
-                    startActivity(Intent(this, TrackSwimmerSuccessActivity::class.java))
+
+                withContext(Dispatchers.Main) {
+                    Toast.makeText(this@TrackAddSwimmerActivity, "Swimmer saved!", Toast.LENGTH_SHORT).show()
+                    startActivity(Intent(this@TrackAddSwimmerActivity, TrackSwimmerSuccessActivity::class.java))
                 }
-            }.start()
+            }
         }
 
         btnReturn.setOnClickListener {

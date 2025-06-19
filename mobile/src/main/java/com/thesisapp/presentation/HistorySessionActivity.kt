@@ -31,7 +31,6 @@ class HistorySessionActivity : AppCompatActivity() {
         tvNotesDetails = findViewById(R.id.tvNotesDetails)
 
         val date = intent.getStringExtra("date")
-        val swimmer = intent.getStringExtra("swimmer")
         val startTime = intent.getStringExtra("startTime")
         val endTime = intent.getStringExtra("endTime")
         val distance = intent.getStringExtra("distance")
@@ -39,6 +38,7 @@ class HistorySessionActivity : AppCompatActivity() {
         val pace = intent.getStringExtra("pace")
         val notes = intent.getStringExtra("notes")
 
+        // TODO: Retrieve from db
         if (date != null) tvDateDetails.text = "Date: $date"
         if (startTime != null) tvStartTimeDetails.text = "Start: $startTime"
         if (endTime != null) tvEndTimeDetails.text = "End: $endTime"
