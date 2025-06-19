@@ -33,6 +33,7 @@
         <activity android:name=".presentation.HistoryListActivity" />
         <activity android:name=".presentation.HistorySessionActivity" />
         <activity android:name=".presentation.SettingsActivity" />
+        <activity android:name=".presentation.SettingsProfileActivity" />
         <activity android:name=".presentation.SettingsExportActivity" />
     </application>
 

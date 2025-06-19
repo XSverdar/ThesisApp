@@ -61,7 +61,6 @@ class TrackAddSwimmerActivity : AppCompatActivity() {
                 category = category
             )
 
-            // TODO: Check if db is working
             CoroutineScope(Dispatchers.IO).launch {
                 db.swimmerDao().insertSwimmer(swimmer)
 

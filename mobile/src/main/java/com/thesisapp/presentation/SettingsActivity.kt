@@ -7,15 +7,18 @@ import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import com.thesisapp.R
+import com.thesisapp.data.AppDatabase
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import com.thesisapp.R
 
 class SettingsActivity : AppCompatActivity() {
 
     private lateinit var btnReturn: ImageButton
+    private lateinit var btnProfile: LinearLayout
     private lateinit var btnExport: LinearLayout
-    private lateinit var btnWatch: LinearLayout
     private lateinit var btnClearAllData: LinearLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,17 +26,18 @@ class SettingsActivity : AppCompatActivity() {
         setContentView(R.layout.settings)
 
         btnReturn = findViewById(R.id.btnReturn)
+        btnProfile = findViewById(R.id.btnProfile)
         btnExport = findViewById(R.id.btnExport)
-        btnWatch = findViewById(R.id.btnWatch)
         btnClearAllData = findViewById(R.id.btnClearAllData)
+
+        btnProfile.setOnClickListener {
+            val intent = Intent(this, SettingsProfileActivity::class.java)
+            startActivity(intent)
+        }
 
         btnExport.setOnClickListener {
             val intent = Intent(this, SettingsExportActivity::class.java)
             startActivity(intent)
-        }
-
-        btnWatch.setOnClickListener {
-            Toast.makeText(this, "Smartwatch Connection: Under Development", Toast.LENGTH_SHORT).show()
         }
 
         btnClearAllData.setOnClickListener {
@@ -54,13 +58,12 @@ class SettingsActivity : AppCompatActivity() {
                 dialog.dismiss()
             }
             .setPositiveButton("OK") { dialog, _ ->
-                // TODO: Check if db is working
-                val db = com.thesisapp.data.AppDatabase.getInstance(this)
+                val db = AppDatabase.getInstance(this)
 
-                kotlinx.coroutines.CoroutineScope(kotlinx.coroutines.Dispatchers.IO).launch {
+                CoroutineScope(Dispatchers.IO).launch {
                     db.swimDataDao().clearAll()
 
-                    withContext(kotlinx.coroutines.Dispatchers.Main) {
+                    withContext(Dispatchers.Main) {
                         Toast.makeText(this@SettingsActivity, "Swim data cleared", Toast.LENGTH_SHORT).show()
                     }
                 }
