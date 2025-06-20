@@ -7,6 +7,7 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.thesisapp.R
+import com.thesisapp.utils.animateClick
 
 class HistoryListAdapter(
     private val sessions: List<Session>,
@@ -24,6 +25,7 @@ class HistoryListAdapter(
         holder.tvDate.text = session.date
         holder.tvTime.text = "Time: ${session.time}"
         holder.btnViewDetails.setOnClickListener {
+            it.animateClick()
             onViewDetailsClick(session)
         }
     }

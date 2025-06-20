@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.thesisapp.R
 import com.thesisapp.data.AppDatabase
+import com.thesisapp.utils.animateClick
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -23,7 +24,10 @@ class SettingsProfileActivity : AppCompatActivity() {
         val txtCategory = findViewById<TextView>(R.id.txtCategory)
 
         val btnReturn = findViewById<ImageButton>(R.id.btnReturn)
-        btnReturn.setOnClickListener { finish() }
+        btnReturn.setOnClickListener {
+            it.animateClick()
+            finish()
+        }
 
         // TODO: Check if db is working
         lifecycleScope.launch(Dispatchers.IO) {

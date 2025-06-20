@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
 import com.thesisapp.R
+import com.thesisapp.utils.animateClick
 
 class TrackSwimmerActivity : AppCompatActivity() {
 
@@ -17,6 +18,7 @@ class TrackSwimmerActivity : AppCompatActivity() {
         btnReturn = findViewById(R.id.btnReturn)
 
         btnReturn.setOnClickListener {
+            it.animateClick()
             val intent = Intent(this, MainActivity::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(intent)

@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.thesisapp.R
+import com.thesisapp.utils.animateClick
 
 class HistoryListActivity : AppCompatActivity() {
 
@@ -43,6 +44,7 @@ class HistoryListActivity : AppCompatActivity() {
         }
 
         btnReturn.setOnClickListener {
+            it.animateClick()
             finish()
         }
     }

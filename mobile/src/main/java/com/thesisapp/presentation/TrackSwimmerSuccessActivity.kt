@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import com.thesisapp.R
+import com.thesisapp.utils.animateClick
 
 class TrackSwimmerSuccessActivity : AppCompatActivity() {
 
@@ -15,6 +16,7 @@ class TrackSwimmerSuccessActivity : AppCompatActivity() {
         val btnContinue = findViewById<Button>(R.id.btnContinue)
 
         btnContinue.setOnClickListener {
+            it.animateClick()
             val intent = Intent(this, TrackSwimmerActivity::class.java)
             startActivity(intent)
         }

@@ -14,6 +14,7 @@ import androidx.lifecycle.lifecycleScope
 import com.google.android.gms.wearable.Wearable
 import com.thesisapp.R
 import com.thesisapp.data.AppDatabase
+import com.thesisapp.utils.animateClick
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -39,26 +40,44 @@ class MainActivity : AppCompatActivity() {
         updateSmartwatchButton()
 
         btnConnect.setOnClickListener {
+            it.animateClick()
             if (isSmartwatchConnected) {
-                AlertDialog.Builder(this)
+                val alertDialog = AlertDialog.Builder(this)
                     .setTitle("Manual Disconnect Required")
                     .setMessage("To disconnect your smartwatch, please turn off Bluetooth or open the Pixel Watch app to manage the connection.")
-                    .setPositiveButton("Open Pixel Watch App") { _, _ ->
+                    .setPositiveButton("Open Pixel Watch App", null)
+                    .setNegativeButton("Cancel", null)
+                    .create()
+
+                alertDialog.setOnShowListener {
+                    val btnOpen = alertDialog.getButton(AlertDialog.BUTTON_POSITIVE)
+                    val btnCancel = alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE)
+
+                    btnOpen.setOnClickListener {
+                        it.animateClick()
                         val intent = packageManager.getLaunchIntentForPackage("com.google.android.apps.wear.companion")
                         if (intent != null) {
                             startActivity(intent)
                         } else {
                             Toast.makeText(this, "Pixel Watch app not found", Toast.LENGTH_SHORT).show()
                         }
+                        alertDialog.dismiss()
                     }
-                    .setNegativeButton("Cancel", null)
-                    .show()
+
+                    btnCancel.setOnClickListener {
+                        it.animateClick()
+                        alertDialog.dismiss()
+                    }
+                }
+
+                alertDialog.show()
             } else {
                 handleSmartwatchConnection()
             }
         }
 
         btnStartTracking.setOnClickListener {
+            it.animateClick()
             if (isSmartwatchConnected) {
                 lifecycleScope.launch(Dispatchers.IO) {
                     val swimmers = db.swimmerDao().getAllSwimmers()
@@ -76,10 +95,12 @@ class MainActivity : AppCompatActivity() {
         }
 
         btnViewHistory.setOnClickListener {
+            it.animateClick()
             startActivity(Intent(this, HistoryListActivity::class.java))
         }
 
         btnSettings.setOnClickListener {
+            it.animateClick()
             startActivity(Intent(this, SettingsActivity::class.java))
         }
     }

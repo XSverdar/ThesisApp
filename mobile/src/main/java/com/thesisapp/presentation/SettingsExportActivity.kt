@@ -7,6 +7,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.thesisapp.R
 import com.thesisapp.data.AppDatabase
+import com.thesisapp.utils.animateClick
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -36,6 +37,7 @@ class SettingsExportActivity : AppCompatActivity() {
         val btnReturn = findViewById<Button>(R.id.btnReturn)
 
         btnFromDate.setOnClickListener {
+            it.animateClick()
             showDatePicker { timestamp ->
                 fromDate = timestamp
                 btnFromDate.text = dateFormat.format(Date(fromDate))
@@ -43,6 +45,7 @@ class SettingsExportActivity : AppCompatActivity() {
         }
 
         btnToDate.setOnClickListener {
+            it.animateClick()
             showDatePicker { timestamp ->
                 toDate = timestamp
                 btnToDate.text = dateFormat.format(Date(toDate))
@@ -50,6 +53,7 @@ class SettingsExportActivity : AppCompatActivity() {
         }
 
         btnExport.setOnClickListener {
+            it.animateClick()
             if (fromDate == 0L || toDate == 0L) {
                 Toast.makeText(this, "Please select both dates", Toast.LENGTH_SHORT).show()
             } else if (fromDate > toDate) {
@@ -60,6 +64,7 @@ class SettingsExportActivity : AppCompatActivity() {
         }
 
         btnReturn.setOnClickListener {
+            it.animateClick()
             finish()
         }
     }

@@ -5,6 +5,7 @@ import android.widget.ImageButton
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.thesisapp.R
+import com.thesisapp.utils.animateClick
 
 class HistorySessionActivity : AppCompatActivity() {
 
@@ -48,6 +49,7 @@ class HistorySessionActivity : AppCompatActivity() {
         if (notes != null) tvNotesDetails.text = "Notes: $notes"
 
         btnReturn.setOnClickListener {
+            it.animateClick()
             finish()
         }
     }

@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.thesisapp.R
 import com.thesisapp.data.AppDatabase
 import com.thesisapp.data.Swimmer
+import com.thesisapp.utils.animateClick
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -44,6 +45,7 @@ class TrackAddSwimmerActivity : AppCompatActivity() {
         val db = AppDatabase.getInstance(this)
 
         btnNext.setOnClickListener {
+            it.animateClick()
             val name = inputName.text.toString().trim()
             val age = inputAge.text.toString().trim()
             val category = inputCategory.text.toString().trim()
@@ -72,6 +74,7 @@ class TrackAddSwimmerActivity : AppCompatActivity() {
         }
 
         btnReturn.setOnClickListener {
+            it.animateClick()
             finish()
         }
     }
