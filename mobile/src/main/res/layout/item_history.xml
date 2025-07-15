@@ -18,18 +18,32 @@
             android:id="@+id/tvDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="February 11, 2025"
+            android:text="MM-DD-YYYY"
             android:textColor="@color/black"
-            android:textSize="18dp"
+            android:textSize="14dp"
             android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/tvTime"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Time Start: 6:10 AM"
-            android:textColor="@color/details"
-            android:textSize="16dp" />
+        <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Time: "
+                android:textSize="14dp"
+                android:textStyle="bold"
+                android:textColor="@color/details" />
+
+            <TextView
+                android:id="@+id/tvTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="..."
+                android:textSize="16dp"
+                android:textColor="@color/details" />
+        </LinearLayout>
     </LinearLayout>
 
     <Button

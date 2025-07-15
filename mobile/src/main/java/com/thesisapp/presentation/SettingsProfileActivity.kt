@@ -35,10 +35,10 @@ class SettingsProfileActivity : AppCompatActivity() {
 
             withContext(Dispatchers.Main) {
                 if (swimmer != null) {
-                    txtName.text = "Name: ${swimmer.name}"
-                    txtAge.text = "Age: ${swimmer.age}"
-                    txtWingspan.text = "Wingspan (Inches): ${swimmer.wingspan}"
-                    txtCategory.text = "Category: ${swimmer.category}"
+                    txtName.text = "${swimmer.name}"
+                    txtAge.text = "${swimmer.age}"
+                    txtWingspan.text = "${swimmer.wingspan}"
+                    txtCategory.text = "${swimmer.category}"
                 } else {
                     txtName.text = "No swimmer profile found"
                     txtAge.text = ""

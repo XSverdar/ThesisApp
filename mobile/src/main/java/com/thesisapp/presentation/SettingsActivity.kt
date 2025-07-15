@@ -21,6 +21,7 @@ class SettingsActivity : AppCompatActivity() {
     private lateinit var btnProfile: LinearLayout
     private lateinit var btnExport: LinearLayout
     private lateinit var btnClearAllData: LinearLayout
+    private lateinit var btnClearAll: LinearLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,6 +31,7 @@ class SettingsActivity : AppCompatActivity() {
         btnProfile = findViewById(R.id.btnProfile)
         btnExport = findViewById(R.id.btnExport)
         btnClearAllData = findViewById(R.id.btnClearAllData)
+        btnClearAll = findViewById(R.id.btnClearAll)
 
         btnProfile.setOnClickListener {
             it.animateClick()
@@ -48,6 +50,11 @@ class SettingsActivity : AppCompatActivity() {
             showClearDataPopup()
         }
 
+        btnClearAll.setOnClickListener {
+            it.animateClick()
+            showClearAllPopup()
+        }
+
         btnReturn.setOnClickListener {
             it.animateClick()
             finish()
@@ -56,7 +63,7 @@ class SettingsActivity : AppCompatActivity() {
 
     private fun showClearDataPopup() {
         val alertDialog = AlertDialog.Builder(this)
-            .setTitle("Confirm Clear All Data")
+            .setTitle("Confirm Clear All SWIMMING Data")
             .setMessage("This will clear ALL SWIM DATA from the database.")
             .setCancelable(false)
             .setNegativeButton("Cancel") { dialog, _ ->
@@ -96,6 +103,58 @@ class SettingsActivity : AppCompatActivity() {
 
                     withContext(Dispatchers.Main) {
                         Toast.makeText(this@SettingsActivity, "Swim data cleared", Toast.LENGTH_SHORT).show()
+                    }
+                }
+
+                alertDialog.dismiss()
+            }
+        }
+
+        alertDialog.show()
+    }
+
+    private fun showClearAllPopup() {
+        val alertDialog = AlertDialog.Builder(this)
+            .setTitle("Confirm Clear ALL Data")
+            .setMessage("This will clear ALL DATA (swimmer's information and swim data) from the database.")
+            .setCancelable(false)
+            .setNegativeButton("Cancel") { dialog, _ ->
+                dialog.dismiss()
+            }
+            .setPositiveButton("OK") { dialog, _ ->
+                val db = AppDatabase.getInstance(this)
+
+                CoroutineScope(Dispatchers.IO).launch {
+                    db.swimDataDao().clearAll()
+
+                    withContext(Dispatchers.Main) {
+                        Toast.makeText(this@SettingsActivity, "All data cleared", Toast.LENGTH_SHORT).show()
+                    }
+                }
+
+                dialog.dismiss()
+            }
+            .create()
+
+        alertDialog.setOnShowListener {
+            // Access buttons AFTER dialog is shown
+            val btnCancel = alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE)
+            val btnOK = alertDialog.getButton(AlertDialog.BUTTON_POSITIVE)
+
+            btnCancel.setOnClickListener {
+                it.animateClick()
+                alertDialog.dismiss()
+            }
+
+            btnOK.setOnClickListener {
+                it.animateClick()
+                val db = AppDatabase.getInstance(this)
+
+                CoroutineScope(Dispatchers.IO).launch {
+                    db.swimmerDao().clearAll()
+
+                    withContext(Dispatchers.Main) {
+                        Toast.makeText(this@SettingsActivity, "All data cleared", Toast.LENGTH_SHORT).show()
                     }
                 }
 

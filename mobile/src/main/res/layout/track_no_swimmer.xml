@@ -16,8 +16,8 @@
 
         <ImageButton
             android:id="@+id/btnReturn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="50dp"
+            android:layout_height="40dp"
             android:background="@android:color/transparent"
             android:src="@drawable/ic_back" />
 
@@ -27,7 +27,7 @@
             android:layout_marginStart="10dp"
             android:text="TRACKING"
             android:textColor="@color/black"
-            android:textSize="30dp"
+            android:textSize="28dp"
             android:textStyle="bold" />
     </LinearLayout>
 
@@ -38,7 +38,7 @@
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="48dp"
+        android:layout_height="40dp"
         android:layout_marginTop="30dp"
         android:layout_marginBottom="30dp"
         android:paddingStart="20dp"
@@ -50,7 +50,7 @@
         android:gravity="center_vertical"
         android:text="Connected to Google Pixel Watch 2"
         android:textColor="@color/text"
-        android:textSize="16dp"
+        android:textSize="14dp"
         android:textStyle="bold"
         tools:ignore="RtlSymmetry" />
 
@@ -61,7 +61,7 @@
         android:layout_marginBottom="24dp"
         android:text="Choose your Swimmer"
         android:textColor="@color/register"
-        android:textSize="24dp"
+        android:textSize="20dp"
         android:textStyle="bold" />
 
     <ImageView
@@ -81,12 +81,12 @@
 
     <Button
         android:id="@+id/btnAddSwimmer"
-        android:layout_width="300dp"
-        android:layout_height="60dp"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
         android:backgroundTint="@color/button"
         android:text="+ Add a Swimmer"
         android:textAllCaps="false"
         android:textColor="@color/white"
-        android:textSize="20dp"
+        android:textSize="14dp"
         android:textStyle="bold" />
 </LinearLayout>

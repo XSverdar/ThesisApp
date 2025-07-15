@@ -15,8 +15,8 @@
 
         <ImageButton
             android:id="@+id/btnReturn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="50dp"
+            android:layout_height="40dp"
             android:src="@drawable/ic_back"
             android:background="?attr/selectableItemBackground" />
 
@@ -25,7 +25,7 @@
             android:layout_height="wrap_content"
             android:text="Settings"
             android:textStyle="bold"
-            android:textSize="30dp"
+            android:textSize="28dp"
             android:layout_marginStart="10dp"
             android:textColor="@color/black" />
     </LinearLayout>
@@ -48,15 +48,15 @@
             android:layout_height="wrap_content"
             android:background="@drawable/border_box"
             android:orientation="horizontal"
-            android:padding="16dp"
+            android:padding="12dp"
             android:gravity="center_vertical"
             android:layout_marginBottom="16dp"
             android:clickable="true"
             android:focusable="true">
 
             <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
                 android:src="@drawable/ic_profile"
                 android:background="?attr/selectableItemBackground" />
 
@@ -65,14 +65,14 @@
                 android:layout_height="wrap_content"
                 android:text="Profile"
                 android:textStyle="bold"
-                android:textSize="16dp"
+                android:textSize="14dp"
                 android:layout_weight="1"
                 android:layout_marginStart="12dp"
                 android:textColor="@color/black" />
 
             <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
                 android:src="@drawable/ic_right" />
         </LinearLayout>
 
@@ -82,15 +82,15 @@
             android:layout_height="wrap_content"
             android:background="@drawable/border_box"
             android:orientation="horizontal"
-            android:padding="16dp"
+            android:padding="12dp"
             android:gravity="center_vertical"
             android:layout_marginBottom="16dp"
             android:clickable="true"
             android:focusable="true">
 
             <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
                 android:src="@drawable/ic_export" />
 
             <TextView
@@ -98,14 +98,14 @@
                 android:layout_height="wrap_content"
                 android:text="Export Data"
                 android:textStyle="bold"
-                android:textSize="16dp"
+                android:textSize="14dp"
                 android:layout_weight="1"
                 android:layout_marginStart="12dp"
                 android:textColor="@color/black" />
 
             <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
                 android:src="@drawable/ic_right" />
         </LinearLayout>
 
@@ -115,8 +115,37 @@
             android:layout_height="wrap_content"
             android:background="@drawable/border_box"
             android:orientation="horizontal"
-            android:padding="16dp"
+            android:padding="12dp"
             android:gravity="center_vertical"
+            android:layout_marginBottom="16dp"
+            android:clickable="true"
+            android:focusable="true">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Clear All Swimming Data"
+                android:textStyle="bold"
+                android:textSize="14dp"
+                android:layout_weight="1"
+                android:layout_marginStart="12dp"
+                android:textColor="@color/black" />
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/ic_right" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/btnClearAll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/border_box"
+            android:orientation="horizontal"
+            android:padding="12dp"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="16dp"
             android:clickable="true"
             android:focusable="true">
 
@@ -125,14 +154,14 @@
                 android:layout_height="wrap_content"
                 android:text="Clear All Data"
                 android:textStyle="bold"
-                android:textSize="16dp"
+                android:textSize="14dp"
                 android:layout_weight="1"
                 android:layout_marginStart="12dp"
                 android:textColor="@color/black" />
 
             <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
                 android:src="@drawable/ic_right" />
         </LinearLayout>
     </LinearLayout>
