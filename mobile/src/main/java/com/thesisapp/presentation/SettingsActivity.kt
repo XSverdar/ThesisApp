@@ -126,6 +126,7 @@ class SettingsActivity : AppCompatActivity() {
 
                 CoroutineScope(Dispatchers.IO).launch {
                     db.swimDataDao().clearAll()
+                    db.mlResultDao().clearAll()
 
                     withContext(Dispatchers.Main) {
                         Toast.makeText(this@SettingsActivity, "All data cleared", Toast.LENGTH_SHORT).show()
@@ -152,6 +153,8 @@ class SettingsActivity : AppCompatActivity() {
 
                 CoroutineScope(Dispatchers.IO).launch {
                     db.swimmerDao().clearAll()
+                    db.swimDataDao().clearAll()
+                    db.mlResultDao().clearAll()
 
                     withContext(Dispatchers.Main) {
                         Toast.makeText(this@SettingsActivity, "All data cleared", Toast.LENGTH_SHORT).show()

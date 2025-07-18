@@ -22,8 +22,8 @@ class HistoryListAdapter(
 
     override fun onBindViewHolder(holder: SessionViewHolder, position: Int) {
         val session = sessions[position]
-        holder.tvDate.text = session.date
-        holder.tvTime.text = "Time: ${session.time}"
+        holder.txtDate.text = session.date
+        holder.txtTime.text = session.timeStart
         holder.btnViewDetails.setOnClickListener {
             it.animateClick()
             onViewDetailsClick(session)
@@ -33,8 +33,8 @@ class HistoryListAdapter(
     override fun getItemCount() = sessions.size
 
     class SessionViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val tvDate: TextView = itemView.findViewById(R.id.tvDate)
-        val tvTime: TextView = itemView.findViewById(R.id.tvTime)
+        val txtDate: TextView = itemView.findViewById(R.id.txtDate)
+        val txtTime: TextView = itemView.findViewById(R.id.txtTime)
         val btnViewDetails: Button = itemView.findViewById(R.id.btnViewDetails)
     }
 }

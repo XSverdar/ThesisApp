@@ -13,9 +13,7 @@ class TrackSwimmerSuccessActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.track_swimmer_success)
 
-        val btnContinue = findViewById<Button>(R.id.btnContinue)
-
-        btnContinue.setOnClickListener {
+        findViewById<Button>(R.id.btnContinue).setOnClickListener {
             it.animateClick()
             val intent = Intent(this, TrackSwimmerActivity::class.java)
             startActivity(intent)

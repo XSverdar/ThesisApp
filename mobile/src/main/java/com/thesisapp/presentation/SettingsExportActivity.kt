@@ -3,6 +3,7 @@ package com.thesisapp.presentation
 import android.app.DatePickerDialog
 import android.os.Bundle
 import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.thesisapp.R
@@ -23,6 +24,7 @@ class SettingsExportActivity : AppCompatActivity() {
     private lateinit var btnExport: Button
     private var fromDate: Long = 0L
     private var toDate: Long = 0L
+    private lateinit var sessionCountTextView: TextView
 
     private val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
     private val calendar = Calendar.getInstance()
@@ -33,6 +35,7 @@ class SettingsExportActivity : AppCompatActivity() {
 
         btnFromDate = findViewById(R.id.fromDate)
         btnToDate = findViewById(R.id.toDate)
+        sessionCountTextView = findViewById(R.id.sessionCount)
         btnExport = findViewById(R.id.btnExport)
         val btnReturn = findViewById<Button>(R.id.btnReturn)
 
@@ -41,6 +44,7 @@ class SettingsExportActivity : AppCompatActivity() {
             showDatePicker { timestamp ->
                 fromDate = timestamp
                 btnFromDate.text = dateFormat.format(Date(fromDate))
+                updateSessionCount()
             }
         }
 
@@ -49,6 +53,7 @@ class SettingsExportActivity : AppCompatActivity() {
             showDatePicker { timestamp ->
                 toDate = timestamp
                 btnToDate.text = dateFormat.format(Date(toDate))
+                updateSessionCount()
             }
         }
 
@@ -80,7 +85,22 @@ class SettingsExportActivity : AppCompatActivity() {
         }, year, month, day).show()
     }
 
-    // TODO: Check if db is working
+    private fun updateSessionCount() {
+        if (fromDate == 0L || toDate == 0L || fromDate > toDate) {
+            sessionCountTextView.text = "FOUND ... SESSIONS"
+            return
+        }
+
+        CoroutineScope(Dispatchers.IO).launch {
+            val db = AppDatabase.getInstance(applicationContext)
+            val count = db.swimDataDao().countSwimsBetweenDates(fromDate, toDate)
+
+            runOnUiThread {
+                sessionCountTextView.text = "FOUND $count SESSIONS"
+            }
+        }
+    }
+
     private fun exportSwimDataToCSV() {
         CoroutineScope(Dispatchers.IO).launch {
             val db = AppDatabase.getInstance(applicationContext)

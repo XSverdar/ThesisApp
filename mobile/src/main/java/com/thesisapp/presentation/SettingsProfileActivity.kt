@@ -29,7 +29,6 @@ class SettingsProfileActivity : AppCompatActivity() {
             finish()
         }
 
-        // TODO: Check if db is working
         lifecycleScope.launch(Dispatchers.IO) {
             val swimmer = AppDatabase.getInstance(applicationContext).swimmerDao().getAllSwimmers().firstOrNull()
 
