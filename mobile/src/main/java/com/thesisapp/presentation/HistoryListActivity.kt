@@ -30,9 +30,8 @@ class HistoryListActivity : AppCompatActivity() {
 
             runOnUiThread {
                 recyclerView.adapter = HistoryListAdapter(sessions) { session ->
-                    val intent = Intent(this, HistorySessionActivity::class.java).apply {
-                        putExtra("mlResultId", session.id) // Pass only the ID
-                    }
+                    val intent = Intent(this, HistorySessionActivity::class.java)
+                    intent.putExtra("sessionId", session.sessionId)
                     startActivity(intent)
                 }
             }

@@ -54,17 +54,17 @@ class HistorySessionActivity : AppCompatActivity() {
             finish()
         }
 
-        val mlResultId = intent.getIntExtra("mlResultId", -1)
-        if (mlResultId != -1) {
-            loadMlResult(mlResultId)
+        val sessionId = intent.getIntExtra("sessionId", -1)
+        if (sessionId != -1) {
+            loadSession(sessionId)
         }
     }
 
-    private fun loadMlResult(id: Int) {
+    private fun loadSession(sessionId: Int) {
         val db = AppDatabase.getInstance(this)
 
         Thread {
-            val result = db.mlResultDao().getById(id)
+            val result = db.mlResultDao().getBySessionId(sessionId)
             result?.let { mlResult ->
                 runOnUiThread {
                     txtDate.text = mlResult.date
@@ -72,16 +72,13 @@ class HistorySessionActivity : AppCompatActivity() {
                     txtEnd.text = mlResult.timeEnd
                     txtDistance.text = "${mlResult.distance} m"
 
-                    // Calculate and set duration
                     txtDuration.text = "${calculateDuration(mlResult.timeStart, mlResult.timeEnd)}"
 
-                    // Stroke percentages
                     txtStrokeBack.text = "${mlResult.backstroke}%"
                     txtStrokeBreast.text = "${mlResult.breaststroke}%"
                     txtStrokeFly.text = "${mlResult.butterfly}%"
                     txtStrokeFree.text = "${mlResult.freestyle}%"
 
-                    // Pace in m/s (optional: convert to min/100m)
                     txtPaceBack.text = "${mlResult.paceBackstroke} m/s"
                     txtPaceBreast.text = "${mlResult.paceBreaststroke} m/s"
                     txtPaceFly.text = "${mlResult.paceButterfly} m/s"

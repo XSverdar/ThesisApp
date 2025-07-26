@@ -3,9 +3,10 @@ package com.thesisapp.data
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "mlresults")
+@Entity(tableName = "ml_results")
 data class MlResult(
-    @PrimaryKey(autoGenerate = true) val id: Int = 0,
+    @PrimaryKey(autoGenerate = true)
+    val sessionId: Int,
     val date: String,
     val timeStart: String,
     val timeEnd: String,

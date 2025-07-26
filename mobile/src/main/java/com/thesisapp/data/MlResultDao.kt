@@ -1,25 +1,26 @@
 package com.thesisapp.data
 
 import androidx.room.*
-import com.thesisapp.presentation.Session
 
 @Dao
 interface MlResultDao {
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(result: MlResult)
+    @Insert
+    fun insert(mlResult: MlResult): Long
 
-    @Query("SELECT id, date, timeStart FROM mlresults ORDER BY date DESC")
-    fun getSessionSummaries(): List<Session>
+    @Query("SELECT MAX(sessionId) FROM ml_results")
+    fun getMaxSessionId(): Int?
 
-    @Query("SELECT * FROM mlresults WHERE id = :id")
-    fun getById(id: Int): MlResult?
+    @Query("SELECT * FROM ml_results WHERE sessionId = :sessionId")
+    fun getBySessionId(sessionId: Int): MlResult
 
-    @Query("SELECT * FROM mlresults ORDER BY id DESC")
-    suspend fun getAll(): List<MlResult>
+    @Query("SELECT sessionId, date FROM ml_results ORDER BY sessionId ASC")
+    fun getSessionSummaries(): List<SessionOnly>
 
-    @Query("DELETE FROM mlresults")
-    suspend fun clearAll()
-
-    @Delete
-    suspend fun delete(result: MlResult)
+    @Query("DELETE FROM ml_results")
+    fun clearAll()
 }
+
+data class MlResultSummary(
+    val sessionId: Int,
+    val date: String
+)

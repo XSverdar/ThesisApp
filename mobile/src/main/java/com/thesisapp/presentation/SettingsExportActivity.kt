@@ -12,6 +12,7 @@ import com.thesisapp.utils.animateClick
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.io.File
 import java.io.FileWriter
 import java.text.SimpleDateFormat
@@ -22,9 +23,10 @@ class SettingsExportActivity : AppCompatActivity() {
     private lateinit var btnFromDate: Button
     private lateinit var btnToDate: Button
     private lateinit var btnExport: Button
+    private lateinit var sessionCountTextView: TextView
+
     private var fromDate: Long = 0L
     private var toDate: Long = 0L
-    private lateinit var sessionCountTextView: TextView
 
     private val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
     private val calendar = Calendar.getInstance()
@@ -93,10 +95,10 @@ class SettingsExportActivity : AppCompatActivity() {
 
         CoroutineScope(Dispatchers.IO).launch {
             val db = AppDatabase.getInstance(applicationContext)
-            val count = db.swimDataDao().countSwimsBetweenDates(fromDate, toDate)
+            val sessionCount = db.swimDataDao().countSessionsBetweenDates(fromDate, toDate)
 
-            runOnUiThread {
-                sessionCountTextView.text = "FOUND $count SESSIONS"
+            withContext(Dispatchers.Main) {
+                sessionCountTextView.text = "FOUND $sessionCount SESSIONS"
             }
         }
     }
@@ -107,7 +109,7 @@ class SettingsExportActivity : AppCompatActivity() {
             val swimDataList = db.swimDataDao().getSwimsBetweenDates(fromDate, toDate)
 
             if (swimDataList.isEmpty()) {
-                runOnUiThread {
+                withContext(Dispatchers.Main) {
                     Toast.makeText(this@SettingsExportActivity, "No swim data found", Toast.LENGTH_SHORT).show()
                 }
                 return@launch
@@ -117,16 +119,15 @@ class SettingsExportActivity : AppCompatActivity() {
             val file = File(getExternalFilesDir(null), fileName)
 
             FileWriter(file).use { writer ->
-                writer.appendLine("timestamp,accel_x,accel_y,accel_z,gyro_x,gyro_y,gyro_z,heart_rate,ppg,ecg")
-
+                writer.appendLine("session_id,timestamp,accel_x,accel_y,accel_z,gyro_x,gyro_y,gyro_z,heart_rate,ppg,ecg")
                 for (data in swimDataList) {
-                    writer.appendLine("${data.timestamp},${data.accel_x},${data.accel_y},${data.accel_z}," +
+                    writer.appendLine("${data.sessionId},${data.timestamp},${data.accel_x},${data.accel_y},${data.accel_z}," +
                             "${data.gyro_x},${data.gyro_y},${data.gyro_z}," +
                             "${data.heart_rate},${data.ppg},${data.ecg}")
                 }
             }
 
-            runOnUiThread {
+            withContext(Dispatchers.Main) {
                 Toast.makeText(this@SettingsExportActivity, "Data exported to ${file.name}", Toast.LENGTH_LONG).show()
             }
         }
