@@ -17,12 +17,7 @@ data class MlResult(
     val breaststroke: Float,
     val butterfly: Float,
     val freestyle: Float,
-
-    // Average pace
-    val paceBackstroke: Float,
-    val paceBreaststroke: Float,
-    val paceButterfly: Float,
-    val paceFreestyle: Float,
+    val speed: Float,
 
     val lap: Int,
 

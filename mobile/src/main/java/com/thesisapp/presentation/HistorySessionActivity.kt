@@ -21,10 +21,7 @@ class HistorySessionActivity : AppCompatActivity() {
     private lateinit var txtStrokeBreast: TextView
     private lateinit var txtStrokeFly: TextView
     private lateinit var txtStrokeFree: TextView
-    private lateinit var txtPaceBack: TextView
-    private lateinit var txtPaceBreast: TextView
-    private lateinit var txtPaceFly: TextView
-    private lateinit var txtPaceFree: TextView
+    private lateinit var txtSpeed: TextView
     private lateinit var txtLap: TextView
     private lateinit var inputNotes: EditText
 
@@ -42,10 +39,7 @@ class HistorySessionActivity : AppCompatActivity() {
         txtStrokeBreast = findViewById(R.id.txtStrokeBreast)
         txtStrokeFly = findViewById(R.id.txtStrokeFly)
         txtStrokeFree = findViewById(R.id.txtStrokeFree)
-        txtPaceBack = findViewById(R.id.txtPaceBack)
-        txtPaceBreast = findViewById(R.id.txtPaceBreast)
-        txtPaceFly = findViewById(R.id.txtPaceFly)
-        txtPaceFree = findViewById(R.id.txtPaceFree)
+        txtSpeed = findViewById(R.id.txtSpeed)
         txtLap = findViewById(R.id.txtLap)
         inputNotes = findViewById(R.id.inputNotes)
 
@@ -79,10 +73,7 @@ class HistorySessionActivity : AppCompatActivity() {
                     txtStrokeFly.text = "${mlResult.butterfly}%"
                     txtStrokeFree.text = "${mlResult.freestyle}%"
 
-                    txtPaceBack.text = "${mlResult.paceBackstroke} m/s"
-                    txtPaceBreast.text = "${mlResult.paceBreaststroke} m/s"
-                    txtPaceFly.text = "${mlResult.paceButterfly} m/s"
-                    txtPaceFree.text = "${mlResult.paceFreestyle} m/s"
+                    txtSpeed.text = "${mlResult.speed} m/s"
 
                     txtLap.text = mlResult.lap.toString()
                     inputNotes.setText(mlResult.notes)
