@@ -1,18 +1,19 @@
 plugins {
     alias(libs.plugins.android.application)
-    alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.kotlin.android) version "2.0.21"
+    alias(libs.plugins.kotlin.compose) version "2.0.21"
     id("com.google.devtools.ksp")
+    id("org.jetbrains.kotlin.plugin.serialization")
 }
 
 android {
     namespace = "com.thesisapp"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.thesisapp"
-        minSdk = 34
-        targetSdk = 34
+        minSdk = 33
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
 
@@ -29,11 +30,11 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "11"
     }
     buildFeatures {
         compose = true
@@ -49,7 +50,7 @@ dependencies {
     implementation(libs.androidx.compose.material)
     implementation(libs.androidx.compose.foundation)
     implementation(libs.androidx.wear.tooling.preview)
-    //implementation(libs.androidx.activity.compose)
+    implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.core.splashscreen)
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.ui.test.junit4)
@@ -57,13 +58,11 @@ dependencies {
     debugImplementation(libs.androidx.ui.test.manifest)
     wearApp(project(":wear"))
 
-    val activity_version = "1.9.3"
-    implementation("androidx.activity:activity:$activity_version")
-    implementation("androidx.activity:activity-ktx:$activity_version")
-    implementation("androidx.activity:activity-compose:$activity_version")
-
     val room_version = "2.6.1"
     implementation("androidx.room:room-runtime:$room_version")
     ksp("androidx.room:room-compiler:$room_version")
     implementation("androidx.room:room-ktx:$room_version")
+
+    val serialization_version = "1.8.1"
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:$serialization_version")
 }

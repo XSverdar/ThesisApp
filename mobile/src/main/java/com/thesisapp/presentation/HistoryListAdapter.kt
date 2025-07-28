@@ -9,7 +9,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.thesisapp.R
 import com.thesisapp.data.AppDatabase
-import com.thesisapp.data.MlResultSummary
 import com.thesisapp.data.SessionOnly
 import com.thesisapp.utils.animateClick
 import java.text.SimpleDateFormat
