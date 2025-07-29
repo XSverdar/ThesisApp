@@ -28,6 +28,7 @@ import com.thesisapp.communication.PhoneSender
 import com.thesisapp.data.AppDatabase
 import com.thesisapp.data.MlResult
 import com.thesisapp.data.SwimData
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
@@ -67,22 +68,21 @@ class TrackSwimmerActivity : AppCompatActivity() {
 
         receiver.register()
 
-        setContent {
-            val sessionId = remember { mutableIntStateOf(0) }
+        lifecycleScope.launch(Dispatchers.IO) {
+            val maxSessionId = db.mlResultDao().getMaxSessionId() ?: 0
+            val newSessionId = maxSessionId + 1
 
-            // Fetch max sessionId and increment
-            LaunchedEffect(Unit) {
-                val max = db.mlResultDao().getMaxSessionId() ?: 0
-                sessionId.intValue = max + 1
+            runOnUiThread {
+                setContent {
+                    RealtimeSensorScreen(
+                        sensorDataFlow = liveSensorData,
+                        phoneSender = sender,
+                        predictedLabel = receiver.predictedLabel,
+                        db = db,
+                        sessionId = newSessionId
+                    )
+                }
             }
-
-            RealtimeSensorScreen(
-                sensorDataFlow = liveSensorData,
-                phoneSender = sender,
-                predictedLabel = receiver.predictedLabel,
-                db = db,
-                sessionId = sessionId.intValue
-            )
         }
     }
 
@@ -125,15 +125,8 @@ fun RealtimeSensorScreen(
                     ecg = data.ecg
                 )
 
-                val mlResult = MlResult(
-                    sessionId = sessionId,
-                    timestamp = System.currentTimeMillis(),
-                    strokeType = predictedLabel.value
-                )
-
                 (context as? AppCompatActivity)?.lifecycleScope?.launch {
                     db.swimDataDao().insert(swim)
-                    db.mlResultDao().insert(mlResult)
                 }
             }
         }
@@ -146,6 +139,10 @@ fun RealtimeSensorScreen(
         contentAlignment = Alignment.Center
     ) {
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
+            ReturnButton()
+
+            Spacer(modifier = Modifier.height(12.dp))
+
             Text("LATEST SENSOR DATA", color = Color.White)
 
             sensorData?.let { data ->
@@ -180,7 +177,46 @@ fun RealtimeSensorScreen(
                 val target = !isRecording
                 phoneSender.sendCommand(
                     start = target,
-                    onSuccess = { isRecording = target },
+                    onSuccess = {
+                        isRecording = target
+
+                        if (!target) { // Recording stopped → save MLResult
+                            (context as? AppCompatActivity)?.lifecycleScope?.launch {
+                                val swimDataList = db.swimDataDao().getSwimDataForSession(sessionId)
+
+                                if (swimDataList.isNotEmpty()) {
+                                    val formatterDate = java.text.SimpleDateFormat(
+                                        "MMMM dd, yyyy",
+                                        Locale.getDefault()
+                                    )
+                                    val formatterTime =
+                                        java.text.SimpleDateFormat("HH:mm:ss", Locale.getDefault())
+
+                                    val firstTime = java.util.Date(swimDataList.first().timestamp)
+                                    val lastTime = java.util.Date(swimDataList.last().timestamp)
+
+                                    val timeStart = formatterTime.format(firstTime)
+                                    val timeEnd = formatterTime.format(lastTime)
+                                    val date = formatterDate.format(firstTime)
+
+                                    // Assign 0f to stroke percentages since no label info available
+                                    val mlResult = MlResult(
+                                        sessionId = sessionId,
+                                        date = date,
+                                        timeStart = timeStart,
+                                        timeEnd = timeEnd,
+                                        backstroke = 0f,
+                                        breaststroke = 0f,
+                                        butterfly = 0f,
+                                        freestyle = 0f,
+                                        notes = "[Editable Text Field]"
+                                    )
+
+                                    db.mlResultDao().insert(mlResult)
+                                }
+                            }
+                        }
+                    },
                     onFailure = {
                         Toast.makeText(
                             context,
@@ -192,10 +228,6 @@ fun RealtimeSensorScreen(
             }) {
                 Text(if (isRecording) "Stop Recording" else "Start Recording")
             }
-
-            Spacer(modifier = Modifier.height(12.dp))
-
-            ReturnButton() // 👈 Added here
         }
     }
 }
@@ -252,29 +284,5 @@ fun ReturnButton(modifier: Modifier = Modifier) {
             .fillMaxWidth()
     ) {
         Text("Return")
-    }
-}
-
-@Composable
-fun RecordingPage() {
-    Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(Color(0xFFF5FFFD))
-    ) {
-        // Return button at the top center
-        ReturnButton(
-            modifier = Modifier
-                .align(Alignment.TopCenter)
-                .padding(top = 16.dp)
-        )
-
-        // Centered label
-        Text(
-            text = "Live Visualization",
-            modifier = Modifier.align(Alignment.Center),
-            fontSize = 20.sp,
-            color = Color.Black
-        )
     }
 }

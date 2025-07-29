@@ -16,13 +16,10 @@ class HistorySessionActivity : AppCompatActivity() {
     private lateinit var txtDuration: TextView
     private lateinit var txtStart: TextView
     private lateinit var txtEnd: TextView
-    private lateinit var txtDistance: TextView
     private lateinit var txtStrokeBack: TextView
     private lateinit var txtStrokeBreast: TextView
     private lateinit var txtStrokeFly: TextView
     private lateinit var txtStrokeFree: TextView
-    private lateinit var txtSpeed: TextView
-    private lateinit var txtLap: TextView
     private lateinit var inputNotes: EditText
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,13 +31,10 @@ class HistorySessionActivity : AppCompatActivity() {
         txtDuration = findViewById(R.id.txtDuration)
         txtStart = findViewById(R.id.txtStart)
         txtEnd = findViewById(R.id.txtEnd)
-        txtDistance = findViewById(R.id.txtDistance)
         txtStrokeBack = findViewById(R.id.txtStrokeBack)
         txtStrokeBreast = findViewById(R.id.txtStrokeBreast)
         txtStrokeFly = findViewById(R.id.txtStrokeFly)
         txtStrokeFree = findViewById(R.id.txtStrokeFree)
-        txtSpeed = findViewById(R.id.txtSpeed)
-        txtLap = findViewById(R.id.txtLap)
         inputNotes = findViewById(R.id.inputNotes)
 
         btnReturn.setOnClickListener {
@@ -64,7 +58,6 @@ class HistorySessionActivity : AppCompatActivity() {
                     txtDate.text = mlResult.date
                     txtStart.text = mlResult.timeStart
                     txtEnd.text = mlResult.timeEnd
-                    txtDistance.text = "${mlResult.distance} m"
 
                     txtDuration.text = "${calculateDuration(mlResult.timeStart, mlResult.timeEnd)}"
 
@@ -73,9 +66,6 @@ class HistorySessionActivity : AppCompatActivity() {
                     txtStrokeFly.text = "${mlResult.butterfly}%"
                     txtStrokeFree.text = "${mlResult.freestyle}%"
 
-                    txtSpeed.text = "${mlResult.speed} m/s"
-
-                    txtLap.text = mlResult.lap.toString()
                     inputNotes.setText(mlResult.notes)
                 }
             }

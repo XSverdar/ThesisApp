@@ -4,8 +4,8 @@ import androidx.room.*
 
 @Dao
 interface MlResultDao {
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertSummary(summary: MlResultSummary)
+    @Insert
+    suspend fun insert(mlResult: MlResult)
 
     @Query("SELECT MAX(sessionId) FROM ml_results")
     fun getMaxSessionId(): Int?
