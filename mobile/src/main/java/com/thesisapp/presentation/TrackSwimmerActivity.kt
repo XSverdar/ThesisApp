@@ -33,6 +33,9 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import java.util.Locale
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
+
 
 class TrackSwimmerActivity : AppCompatActivity() {
     private lateinit var receiver: PhoneReceiver
@@ -69,17 +72,13 @@ class TrackSwimmerActivity : AppCompatActivity() {
         receiver.register()
 
         lifecycleScope.launch(Dispatchers.IO) {
-            val maxSessionId = db.mlResultDao().getMaxSessionId() ?: 0
-            val newSessionId = maxSessionId + 1
-
             runOnUiThread {
                 setContent {
                     RealtimeSensorScreen(
                         sensorDataFlow = liveSensorData,
                         phoneSender = sender,
                         predictedLabel = receiver.predictedLabel,
-                        db = db,
-                        sessionId = newSessionId
+                        db = db
                     )
                 }
             }
@@ -101,15 +100,20 @@ fun RealtimeSensorScreen(
     sensorDataFlow: Flow<SwimData?>,
     phoneSender: PhoneSender,
     predictedLabel: State<String>,
-    db: AppDatabase,
-    sessionId: Int
+    db: AppDatabase
 ) {
     val sensorData by sensorDataFlow.collectAsState(initial = null)
     var isRecording by remember { mutableStateOf(false) }
     val context = LocalContext.current
 
+    var lastTimestamp by remember { mutableStateOf(0L) }
+    var newSessionId = 0
+
     LaunchedEffect(sensorData) {
         sensorData?.let { data ->
+            if (data.timestamp <= lastTimestamp) return@LaunchedEffect
+            lastTimestamp = data.timestamp
+
             if (isRecording) {
                 val swim = SwimData(
                     sessionId = sessionId,
@@ -125,7 +129,7 @@ fun RealtimeSensorScreen(
                     ecg = data.ecg
                 )
 
-                (context as? AppCompatActivity)?.lifecycleScope?.launch {
+                (context as? AppCompatActivity)?.lifecycleScope?.launch(Dispatchers.IO) {
                     db.swimDataDao().insert(swim)
                 }
             }
@@ -146,14 +150,16 @@ fun RealtimeSensorScreen(
             Text("LATEST SENSOR DATA", color = Color.White)
 
             sensorData?.let { data ->
-                HandViewerComposable(
-                    gyroX = data.gyro_x ?: 0f,
-                    gyroY = data.gyro_y ?: 0f,
-                    gyroZ = data.gyro_z ?: 0f,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(300.dp)
-                )
+                sensorData?.let { data ->
+                    HandViewerComposable(
+                        gyroX = data.gyro_x ?: 0f,
+                        gyroY = data.gyro_y ?: 0f,
+                        gyroZ = data.gyro_z ?: 0f,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(300.dp)
+                    )
+                }
 
                 StrokePrediction(predictedLabel)
 
@@ -180,8 +186,21 @@ fun RealtimeSensorScreen(
                     onSuccess = {
                         isRecording = target
 
+                        (context as? AppCompatActivity)?.lifecycleScope?.launch(Dispatchers.IO) {
+                            val maxSessionId = db.mlResultDao().getMaxSessionId() ?: 0
+                            newSessionId = maxSessionId + 1
+                        }
+
+                        if (isRecording) {
+                            phoneSender.sendId(
+                                id = newSessionId,
+                                onSuccess = {},
+                                onFailure = {}
+                            )
+                        }
+
                         if (!target) { // Recording stopped → save MLResult
-                            (context as? AppCompatActivity)?.lifecycleScope?.launch {
+                            (context as? AppCompatActivity)?.lifecycleScope?.launch(Dispatchers.IO) {
                                 val swimDataList = db.swimDataDao().getSwimDataForSession(sessionId)
 
                                 if (swimDataList.isNotEmpty()) {
@@ -213,6 +232,8 @@ fun RealtimeSensorScreen(
                                     )
 
                                     db.mlResultDao().insert(mlResult)
+
+
                                 }
                             }
                         }

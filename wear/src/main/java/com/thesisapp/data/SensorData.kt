@@ -1,14 +1,17 @@
+@file:OptIn(kotlinx.serialization.InternalSerializationApi::class)
+
 package com.thesisapp.data
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import java.text.SimpleDateFormat
-import java.util.Date
-import java.util.Locale
 
+import kotlinx.serialization.Serializable
+
+@Serializable
 @Entity(tableName = "sensor_data")
 data class SensorData(
-    @PrimaryKey(autoGenerate = true) val id: Long = 0,
+    @PrimaryKey(autoGenerate = true) val id: Int = 0,
+    val sessionId: Int,
     val timestamp: Long = System.currentTimeMillis(),
 
     // Accelerometer

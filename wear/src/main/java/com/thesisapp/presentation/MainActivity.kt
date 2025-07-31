@@ -81,6 +81,11 @@ class MainActivity : ComponentActivity(), SensorEventListener {
         Manifest.permission.WAKE_LOCK
     )
 
+    private var lastSendTime = 0L
+    private val sendIntervalMs = 300L // send at most every 300 ms
+
+    var id = 0
+
     // main function
     override fun onCreate(savedInstanceState: Bundle?) {
         installSplashScreen()
@@ -149,6 +154,10 @@ class MainActivity : ComponentActivity(), SensorEventListener {
 
     override fun onSensorChanged(event: SensorEvent?) {
         if (event == null) return
+        if (!isRecording) return
+        val now = System.currentTimeMillis()
+        if (now - lastSendTime < sendIntervalMs) return // too soon, skip sending
+        lastSendTime = now
 
         when (event.sensor.type) {
             Sensor.TYPE_LINEAR_ACCELERATION -> accelValues = event.values.clone()
@@ -162,6 +171,7 @@ class MainActivity : ComponentActivity(), SensorEventListener {
         }
 
         val currentData = SensorData(
+            sessionId = id,
             accel_x = accelValues[0],
             accel_y = accelValues[1],
             accel_z = accelValues[2],
