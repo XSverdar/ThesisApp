@@ -10,7 +10,7 @@ interface SwimDataDao {
     @Insert
     fun insert(swimData: SwimData)
 
-    @Query("SELECT * FROM swim_data WHERE sessionId BETWEEN :fromDate AND :toDate")
+    @Query("SELECT * FROM swim_data WHERE timestamp BETWEEN :fromDate AND :toDate")
     fun getSwimsBetweenDates(fromDate: Long, toDate: Long): List<SwimData>
 
     @Query("SELECT * FROM swim_data WHERE sessionId = :sessionId ORDER BY timestamp ASC")

@@ -5,9 +5,11 @@ import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import com.thesisapp.R
 import com.thesisapp.data.AppDatabase
 import com.thesisapp.utils.animateClick
+import kotlinx.coroutines.launch
 
 class HistorySessionActivity : AppCompatActivity() {
 
@@ -66,7 +68,16 @@ class HistorySessionActivity : AppCompatActivity() {
                     txtStrokeFly.text = "${mlResult.butterfly}%"
                     txtStrokeFree.text = "${mlResult.freestyle}%"
 
-                    inputNotes.setText(mlResult.notes)
+                    inputNotes.setOnFocusChangeListener { _, hasFocus ->
+                        if (!hasFocus) {
+                            val newNotes = inputNotes.text.toString()
+                            if (newNotes != mlResult.notes) {
+                                lifecycleScope.launch {
+                                    db.mlResultDao().update(mlResult.copy(notes = newNotes))
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }.start()

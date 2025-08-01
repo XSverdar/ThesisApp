@@ -100,6 +100,7 @@ class SettingsActivity : AppCompatActivity() {
 
                 CoroutineScope(Dispatchers.IO).launch {
                     db.swimDataDao().clearAll()
+                    db.mlResultDao().clearAll()
 
                     withContext(Dispatchers.Main) {
                         Toast.makeText(this@SettingsActivity, "Swim data cleared", Toast.LENGTH_SHORT).show()
@@ -125,6 +126,7 @@ class SettingsActivity : AppCompatActivity() {
                 val db = AppDatabase.getInstance(this)
 
                 CoroutineScope(Dispatchers.IO).launch {
+                    db.swimmerDao().clearAll()
                     db.swimDataDao().clearAll()
                     db.mlResultDao().clearAll()
 

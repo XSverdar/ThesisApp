@@ -13,7 +13,7 @@ class StrokeClassifier(context: Context) {
     companion object {
         private const val NUM_AXES = 6
         private const val FEATURE_COUNT = NUM_AXES * 4
-        private const val WINDOW_SIZE = 35
+        private const val WINDOW_SIZE = 29
     }
 
     private val interpreter: Interpreter = Interpreter(loadModelFile(context, "model.tflite"))

@@ -18,5 +18,5 @@ data class MlResult(
     val freestyle: Float,
 
     // Notes field
-    val notes: String
+    val notes: String = ""
 )

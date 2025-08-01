@@ -10,11 +10,14 @@ interface MlResultDao {
     @Query("SELECT MAX(sessionId) FROM ml_results")
     fun getMaxSessionId(): Int?
 
+    @Query(" SELECT * FROM ml_results GROUP BY sessionId ORDER BY sessionId DESC")
+    fun getSessionSummaries(): List<MlResult>
+
     @Query("SELECT * FROM ml_results WHERE sessionId = :sessionId")
     fun getBySessionId(sessionId: Int): MlResult
 
-    @Query("SELECT sessionId, date FROM ml_results ORDER BY sessionId ASC")
-    fun getSessionSummaries(): List<SessionOnly>
+    @Update
+    suspend fun update(mlResult: MlResult)
 
     @Query("DELETE FROM ml_results")
     fun clearAll()

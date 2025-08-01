@@ -5,18 +5,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.thesisapp.R
-import com.thesisapp.data.AppDatabase
-import com.thesisapp.data.SessionOnly
+import com.thesisapp.data.MlResult
 import com.thesisapp.utils.animateClick
-import java.text.SimpleDateFormat
-import java.util.*
 
 class HistoryListAdapter(
-    private val sessions: List<SessionOnly>,
-    private val onViewDetailsClick: (SessionOnly) -> Unit
+    private val sessions: List<MlResult>,
+    private val onViewDetailsClick: (MlResult) -> Unit
 ) : RecyclerView.Adapter<HistoryListAdapter.SessionViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SessionViewHolder {
@@ -27,37 +23,9 @@ class HistoryListAdapter(
 
     override fun onBindViewHolder(holder: SessionViewHolder, position: Int) {
         val session = sessions[position]
-        val context = holder.itemView.context
-        val db = AppDatabase.getInstance(context)
 
-        // Fetch first timestamp for this session in background
-        Thread {
-            val firstTimestampStr = db.swimDataDao().getFirstTimestampForSession(session.sessionId)
-
-            val formattedDate: String
-            val formattedTime: String
-
-            if (firstTimestampStr != null) {
-                // Parse the string into a Date object
-                val inputFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
-                val date = inputFormat.parse(firstTimestampStr.toString())
-
-                val dateFormat = SimpleDateFormat("MMMM dd, yyyy", Locale.getDefault())
-                val timeFormat = SimpleDateFormat("HH:mm:ss", Locale.getDefault())
-
-                formattedDate = dateFormat.format(date ?: Date())
-                formattedTime = timeFormat.format(date ?: Date())
-            } else {
-                formattedDate = "No Date"
-                formattedTime = "No Time"
-            }
-
-            // Safely update UI on main thread
-            (context as AppCompatActivity).runOnUiThread {
-                holder.txtDate.text = formattedDate
-                holder.txtTime.text = formattedTime
-            }
-        }.start()
+        holder.txtDate.text = session.date.ifBlank { "No Date" }
+        holder.txtTime.text = session.timeStart.ifBlank { "No Time" }
 
         holder.btnViewDetails.setOnClickListener {
             it.animateClick()
@@ -65,7 +33,7 @@ class HistoryListAdapter(
         }
     }
 
-    override fun getItemCount() = sessions.size
+    override fun getItemCount(): Int = sessions.size
 
     class SessionViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val txtDate: TextView = itemView.findViewById(R.id.txtDate)

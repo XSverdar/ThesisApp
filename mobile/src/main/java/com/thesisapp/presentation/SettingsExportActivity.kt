@@ -2,6 +2,7 @@ package com.thesisapp.presentation
 
 import android.app.DatePickerDialog
 import android.os.Bundle
+import android.os.Environment
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
@@ -53,8 +54,14 @@ class SettingsExportActivity : AppCompatActivity() {
         btnToDate.setOnClickListener {
             it.animateClick()
             showDatePicker { timestamp ->
-                toDate = timestamp
-                btnToDate.text = dateFormat.format(Date(toDate))
+                // 23:59:59.999 of selected date
+                val endOfDay = Calendar.getInstance().apply {
+                    timeInMillis = timestamp
+                    add(Calendar.DATE, 1) // move to next day
+                }.timeInMillis - 1
+
+                toDate = endOfDay
+                btnToDate.text = dateFormat.format(Date(timestamp))
                 updateSessionCount()
             }
         }
@@ -82,8 +89,10 @@ class SettingsExportActivity : AppCompatActivity() {
         val day = calendar.get(Calendar.DAY_OF_MONTH)
 
         DatePickerDialog(this, { _, y, m, d ->
-            calendar.set(y, m, d, 0, 0, 0)
-            onDateSelected(calendar.timeInMillis)
+            val selected = Calendar.getInstance()
+            selected.set(y, m, d, 0, 0, 0)
+            selected.set(Calendar.MILLISECOND, 0)
+            onDateSelected(selected.timeInMillis)
         }, year, month, day).show()
     }
 
@@ -116,7 +125,8 @@ class SettingsExportActivity : AppCompatActivity() {
             }
 
             val fileName = "swim_data_export_${System.currentTimeMillis()}.csv"
-            val file = File(getExternalFilesDir(null), fileName)
+            val downloadsDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
+            val file = File(downloadsDir, fileName)
 
             FileWriter(file).use { writer ->
                 writer.appendLine("session_id,timestamp,accel_x,accel_y,accel_z,gyro_x,gyro_y,gyro_z,heart_rate,ppg,ecg")

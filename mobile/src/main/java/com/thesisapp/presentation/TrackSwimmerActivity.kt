@@ -105,18 +105,18 @@ fun RealtimeSensorScreen(
     val sensorData by sensorDataFlow.collectAsState(initial = null)
     var isRecording by remember { mutableStateOf(false) }
     val context = LocalContext.current
+    val strokeResults = mutableListOf<String>()
 
-    var lastTimestamp by remember { mutableStateOf(0L) }
+    var startTime by remember { mutableStateOf(0L) }
     var newSessionId = 0
 
     LaunchedEffect(sensorData) {
         sensorData?.let { data ->
-            if (data.timestamp <= lastTimestamp) return@LaunchedEffect
-            lastTimestamp = data.timestamp
+            if (data.timestamp <= startTime) return@LaunchedEffect
 
             if (isRecording) {
                 val swim = SwimData(
-                    sessionId = sessionId,
+                    sessionId = newSessionId,
                     timestamp = System.currentTimeMillis(),
                     accel_x = data.accel_x,
                     accel_y = data.accel_y,
@@ -161,7 +161,8 @@ fun RealtimeSensorScreen(
                     )
                 }
 
-                StrokePrediction(predictedLabel)
+                val predictedStroke = StrokePrediction(predictedLabel)
+                strokeResults.add(predictedStroke.toString())
 
                 Text(
                     "Accel: x=${data.accel_x.format()}, y=${data.accel_y.format()}, z=${data.accel_z.format()}",
@@ -194,14 +195,14 @@ fun RealtimeSensorScreen(
                         if (isRecording) {
                             phoneSender.sendId(
                                 id = newSessionId,
-                                onSuccess = {},
+                                onSuccess = {startTime = System.currentTimeMillis()},
                                 onFailure = {}
                             )
                         }
 
                         if (!target) { // Recording stopped → save MLResult
                             (context as? AppCompatActivity)?.lifecycleScope?.launch(Dispatchers.IO) {
-                                val swimDataList = db.swimDataDao().getSwimDataForSession(sessionId)
+                                val swimDataList = db.swimDataDao().getSwimDataForSession(newSessionId)
 
                                 if (swimDataList.isNotEmpty()) {
                                     val formatterDate = java.text.SimpleDateFormat(
@@ -211,23 +212,25 @@ fun RealtimeSensorScreen(
                                     val formatterTime =
                                         java.text.SimpleDateFormat("HH:mm:ss", Locale.getDefault())
 
-                                    val firstTime = java.util.Date(swimDataList.first().timestamp)
+                                    val firstTime = startTime
                                     val lastTime = java.util.Date(swimDataList.last().timestamp)
 
                                     val timeStart = formatterTime.format(firstTime)
                                     val timeEnd = formatterTime.format(lastTime)
                                     val date = formatterDate.format(firstTime)
 
+                                    val percentages = calculateStrokePercentages(strokeResults)
+
                                     // Assign 0f to stroke percentages since no label info available
                                     val mlResult = MlResult(
-                                        sessionId = sessionId,
+                                        sessionId = newSessionId,
                                         date = date,
                                         timeStart = timeStart,
                                         timeEnd = timeEnd,
-                                        backstroke = 0f,
-                                        breaststroke = 0f,
-                                        butterfly = 0f,
-                                        freestyle = 0f,
+                                        backstroke = percentages["backstroke"] ?: 0f,
+                                        breaststroke = percentages["breaststroke"] ?: 0f,
+                                        butterfly = percentages["butterfly"] ?: 0f,
+                                        freestyle = percentages["freestyle"] ?: 0f,
                                         notes = "[Editable Text Field]"
                                     )
 
@@ -251,6 +254,19 @@ fun RealtimeSensorScreen(
             }
         }
     }
+}
+
+fun calculateStrokePercentages(strokeResults: List<String>): Map<String, Float> {
+    val total = strokeResults.size.toFloat().takeIf { it > 0 } ?: return emptyMap()
+
+    val counts = strokeResults.groupingBy { it.lowercase() }.eachCount()
+
+    return mapOf(
+        "freestyle" to (counts["freestyle"] ?: 0) / total * 100,
+        "backstroke" to (counts["backstroke"] ?: 0) / total * 100,
+        "breaststroke" to (counts["breaststroke"] ?: 0) / total * 100,
+        "butterfly" to (counts["butterfly"] ?: 0) / total * 100
+    )
 }
 
 @Composable
