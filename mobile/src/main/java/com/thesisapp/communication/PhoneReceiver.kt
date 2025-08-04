@@ -73,5 +73,10 @@ class PhoneReceiver(private val context: Context, private val liveSensorFlow: Mu
         } else {
             Log.d(TAG, "Unknown path: ${event.path}")
         }
+
+        val timestamp: Long = System.currentTimeMillis()
+        Log.d("WearReceiverService", "PHONE received data at timestamp: $timestamp")
     }
+
+
 }

@@ -37,5 +37,7 @@ class WearSender(private val context: Context) {
             .addOnFailureListener { e ->
                 Log.e(TAG, "Failed to get connected nodes: ${e.message}", e)
             }
+        val timestamp: Long = System.currentTimeMillis()
+        Log.d("WearSender", "WATCH sending data at timestamp: $timestamp")
     }
 }

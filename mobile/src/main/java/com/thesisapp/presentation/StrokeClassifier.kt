@@ -1,6 +1,7 @@
 package com.thesisapp.presentation
 
 import android.content.Context
+import android.util.Log
 import org.tensorflow.lite.Interpreter
 import java.io.FileInputStream
 import java.nio.ByteBuffer
@@ -8,6 +9,11 @@ import java.nio.ByteOrder
 import java.nio.MappedByteBuffer
 import java.nio.channels.FileChannel
 import kotlin.math.sqrt
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
+
+
 
 class StrokeClassifier(context: Context) {
     companion object {
@@ -33,6 +39,8 @@ class StrokeClassifier(context: Context) {
 
         return if (sensorWindow.size >= WINDOW_SIZE) {
             val result = classify(sensorWindow)
+            val label = getLabel(result)
+            onMLResultReady(label) // ⬅️ Now the function is called
             sensorWindow.clear()
             result
         } else null
@@ -76,5 +84,12 @@ class StrokeClassifier(context: Context) {
 
     fun getLabel(index: Int): String {
         return listOf("Backstroke", "Breaststroke", "Butterfly", "Freestyle").getOrElse(index) { "Unknown" }
+    }
+
+    private fun onMLResultReady(result: String) {
+        val timestamp: Long = System.currentTimeMillis()
+        val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS", Locale.getDefault())
+        val formatted = dateFormat.format(Date(timestamp))
+        Log.d("MLProcessor", "Detected stroke: $result at $formatted")
     }
 }
